@@ -1,0 +1,47 @@
+
+<tr class="resource_listing">
+	<% if resource.link != nil %>
+	<td class="icon_cell">
+		<%= image_tag("/images/linkicon.png", :alt => "Link") %>
+	</td>
+	<td class="file_name">
+			<%= link_to "#{truncate(resource.link, :length => 50)}", resource.link %><br>
+
+	<% else %>
+	<td class="icon_cell">
+		<%= image_tag("/images/fileicon.png", :alt => "File") %>
+	</td>
+	<% @resource = resource %>
+	<td class="file_name">
+			<%= link_to "#{truncate(File.basename(resource.upload_identifier), :length => 30)}", { :controller => :resources, :action => :download, :id => resource.id }  %>
+			- <%= number_to_human_size(resource.file_size) %><br>
+	<% end %>
+
+			<% if resource.user == current_user %>
+			Saved on <%= resource.created_at.strftime("%B %d, %Y") %>
+			<% else %>
+			Shared on <%= resource.shared_item(current_user).created_at.strftime("%B %d, %Y") %>
+			<% end %>
+			 by <%= resource.user.name %>
+	</td>
+	<td class="share_link delete_link">
+		<%= link_to "Share	", resource %><br>
+		<% if resource.user_id == current_user.id %>
+		<%= link_to "Delete", resource, { :controller => :resources, :method => :delete, :confirm => "You sure?",
+				  :title => "Delete" } %>
+		<% end %>
+	</td>
+</tr>
+<% if resource.note %>
+<tr></tr>
+<tr>
+		<td>Note:</td>
+		<td>
+			<%= @resource.note %>
+		</td>
+		<td></td>
+</tr>
+	
+<% end %>
+
+

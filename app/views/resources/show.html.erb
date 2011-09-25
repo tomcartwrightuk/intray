@@ -1,0 +1,62 @@
+
+<% if @users.empty? %>
+	<%= link_to "Find", users_path %> your colleagues to start sharing resources with them! 
+<% else %>
+
+<div class="centred_content" style="width: 500px;">
+<p class="no_bottom_margin">Share:</p>
+<table class="blue_coloured_element resource_to_share	centred_content">
+	<tr>
+		<td class="icon_cell">
+		<% if @resource.link %>
+			<%= image_tag("/images/linkicon.png", :alt => "Link") %>
+		<td>
+			<%= link_to "#{truncate(@resource.link, :length => 50)}", @resource.link %>
+		</td>
+		<% else %>
+			<%= image_tag("/images/fileicon.png", :alt => "Link") %>
+		</td>
+		<td class="file_name">
+			<%= link_to "#{File.basename(@resource.upload_identifier.to_s)}", { :action => :download, :id => @resource.id }  %>
+			- <%= number_to_human_size(@resource.upload.size) %>
+		</td>
+		<% end %>
+	</tr>
+	<tr>
+		<td>Note:</td>
+		<td>
+			<% if @resource.note %>
+			<%= @resource.note %>
+			<% else %>
+			<%= render 'resources/add_note' %>
+			<% end %>
+		</td>
+	</tr>
+</table>
+</div>
+	 <br>
+	<%= will_paginate @users %>
+	<table class="resource_share centred_content">	
+		<% @users.each do |user| %>
+
+					<tr>
+					<td><%= link_to gravatar_for(user, :size => 30), user %></td>
+					<td><%= user.name %></td>
+						<% @user_to_share = user %>
+					<td><div id="share_form">
+							<% if @resource.shared_with?(@user_to_share.id) %>
+								<%= render '/resources/unshare' %>
+							<% else %>
+								<%= render 'resources/share' %>
+							<% end %>
+						</div>
+					</td>
+				</tr>
+		<% end %>
+	</table>
+<% end %>
+<p class="centred_content block" style="width: 500px;">
+<%= link_to "Find", users_path %> more colleagues to start sharing resources with them!
+</p>
+
+

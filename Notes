@@ -1,0 +1,263 @@
+<%= number_to_human_size(resource.upload.size) %><br>
+
+</p>
+<%= render 'resources/uploadform_nonajax' %>
+<p>
+
+<td class="others_files">
+				<h1>Files that others have shared with you:</h1>
+				<ul class="users">
+					<li class="shared_files">
+						<% if @shared_items == nil %>
+						No files shared with you
+						<% else %>
+							<table>
+							<tr>
+							<td>File name</td>
+							<td>Uploaded by</td>
+							<td>Note</td>
+							</tr>
+							<%= render @shared_items %>
+							</table>
+						<% end %>
+					</li>
+				</ul>
+			</td>	
+
+
+
+<td>
+	<%= form_for resource, :html => {:multipart => true} do |f| %>
+    <label>
+      <%= f.check_box :remove_upload %>
+			<%= f.submit "Delete" %>
+    </label>
+	<% end %>
+	</td>
+::Notes::
+
+From _resource for the share method:
+<%= form_tag({:action => :share_user_index}, { :class => "share_form", :method => :post})  do %>
+<%= hidden_field_tag :resource_id, resource.id %>
+		<div class="actions">
+			<%= link_to 'Share', "#", :onclick=>"$('.share_form').submit()" %>
+			<% end %></div>
+
+
+Methods needed:
+
+@upload.file_sharing_relationships - lists users that file is shared with
+@user.files_shared_with -  lists files that are shared with the user.
+@user.share_file_with(user.id, file.id)
+
+	<%= form_for upload.file_sharing_relationships.create(:sharer_id => current_user.id, :upload_id => upload.id, ) do |f| %>
+Next steps:
+
+Create a for so that you can click on a button, takes you to a page of users that you are friends with and lets you select who you want to share the fiel with.
+Things required:
+- action that renders the view and passes the value of upload.id
+- View that shows all users and a form per user? With a check box. Submit button at the bottom.
+
+
+<% if signed_in? %>
+  
+	<table class="front" summary="For signed-in users">
+    <tr>
+      <td class="sidebar round coloured_element shadow">
+				<%= render :partial => '/resources/uploadform_nonajax' %>
+			</td>
+			<td class="table_padding"></td>
+      
+    
+			<td id="main_frame_td" class="main coloured_element round shadow">
+				<div id="main_frame">
+				</div>
+      </td>
+		</tr>
+  </table>
+<% else %>
+		<div id="signup" class="coloured_element round page_section signup_or_in shadow">
+			<%= render 'users/new' %>
+	</div>
+<% end %>
+
+
+
+
+Current progress on sharing files::
+
+- need to find a way to link uploads and users and relationships together.
+- have put the has_many "relationship style things in the user model - this may need to be moved"
+
+
+Users send messageswww.riotcleanup.co.uk
+
+Models needed
+
+USERS HAVE_MANY:
+connections 	
+groups
+files
+messages
+
+
+groups have_many:
+group_id
+groupcreator_id
+members_ids
+
+
+Files
+:shared_with, :through => :file_sharing_relationships, :source => "shared_with_id"
+
+sharer_id, file_id, shared_id
+
+
+
+user has_many groups through 
+friends have many
+groups has_many members through group_relationships
+
+
+
+
+Current progress:
+Trying to get the v5 instructions to work. Have delted the javascript inlcude tags from application.html file:
+<%= javascript_include_tag 'jquery.min' %>
+<%= javascript_include_tag 'jquery-ui' %>
+<%= javascript_include_tag 'jquery.fileupload' %>
+<%= javascript_include_tag 'jquery.fileupload-ui' %>
+<%= javascript_include_tag 'application' %
+
+
+<%= stylesheet_link_tag 'jquery.fileupload-ui' %>
+			<%= stylesheet_link_tag 'jquery-ui' %
+#     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => "5" 
+
+Previous tasks:#     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => "5" 
+#     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => "5" 
+trying to get jquery file upload to be recognised. Have minified using a the Packer algorythm\. hasnt worked (see firefox)
+Things that need adding:
+Spec tests:
+- test the security of the uploads
+- spec tests for the uploads model
+- spec tests for the uploads controller
+- spec tests for the uploads form and feed
+
+Creative items:
+- Be able to click and download the downloads
+- Add attr_accessible to the upload model
+- Create a feed that is a mixtures of uploads and messages
+
+Error messages I would liek to understand:
+#     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => "5" 
+undefined method `download' for #<Upload:0x007f0858254d30>
+
+
+Code snippets
+
+<%= builder.label :caption, "Image Caption" %>
+		<%= builder.text_field :caption %>
+		
+		<%= builder.label :uploaded, "Image File" %>
+		<%= builder.file_field :uploaded %>
+		<%#     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => #     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => "5" "5" = builder.submit "Upload" %>
+
+<%= form_for @upload, :html => { :multipart => true } do |f| %>
+<%= render 'shared/error_messages', :object => f.object %>
+	<%= f.label :caption, "Image Caption" %>
+		<%= f.text_field :caption %>
+		<%= f.file_field :uploaded %>
+		<%= f.submit "Upload" %>
+		<div>Upload files</div>
+<% end %>
+
+:pic_path => @upload.uploaded.url.to_s
+
+            return $('<tr><td><img alt="Photo" width="40" height="40" src="' + file.pic_path + '">' + file.name + '<\/td><\/tr>');
+
+
+  resources :uploads, :only => [:index, :create, :show, :download]
+
+
+<%= link_to 'Download now', upload.download %>
+
+
+#     :id => "1",
+#     :created_at => "2011-06-14 19:37:22.690265",
+#     :updated_at => "2011-07-14 19:37:22.690265",
+#     :uploaded_file_name => "foobar.jpg",
+#     :uploaded_content_type => "image/jpeg",
+#     :uploaded_file_size => "19579",
+#     :uploaded_updated_at => "2011-07-14 19:37:22.655848",
+#     :user_id => "1",
+#     :decription => "foo",
+#     :tags => "bar",
+#     :path => "",
+#     :file_id => "5" 	

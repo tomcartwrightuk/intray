@@ -1,0 +1,6 @@
+<% unless @uploadfeed_items.empty? %>
+  <table class="uploadposts" summary="User uploaded">
+    <%= render :partial => 'shared/uploadfeed_item', :collection => @uploadfeed_items %>
+  </table>
+  <%= will_paginate @uploadfeed_items %>
+<% end %>

@@ -1,0 +1,36 @@
+<h1>Your files:</h1>
+
+<div id="uploadform">
+<%= stylesheet_link_tag('jquery.fileupload-ui') %>
+<%= javascript_include_tag 'jquery.fileupload', 'jquery.fileupload-ui' %>
+
+<script type="text/javascript" charset="utf-8"> 
+   $(function () {
+  $('.upload').fileUploadUI({
+        uploadTable: $('.upload_files'),
+        downloadTable: $('.download_files'),
+        buildUploadRow: function (files, index) {
+            var file = files[index];
+            return $('<tr><td>' + file.name + '<\/td>' +
+                    '<td class="file_upload_progress">Progress<div><\/div><\/td>' +
+                    '<td class="file_upload_cancel">' +
+                    '<button class="ui-state-default ui-corner-all" title="Cancel">' +
+                    '<span class="ui-icon ui-icon-cancel">Cancel<\/span>' +
+                    '<\/button><\/td><\/tr>');
+        },
+        buildDownloadRow: function (file) {
+            return $('<tr><td><img alt="Photo" width="40" height="40" src="' + file.pic_path + '">' + file.name + '<\/td><\/tr>');
+        },
+    });
+});
+</script>
+<div class="files"> 
+<%= form_for @resource, :html => { :class => "upload", :multipart => true } do |f| %>
+  <%= f.file_field :resource %>
+  <div>Drop files here</div>
+<% end %>
+
+<table class="upload_files"></table>
+<table class="download_files"></table>
+</div>
+</div>

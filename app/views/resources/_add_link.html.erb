@@ -1,0 +1,19 @@
+<div id="add_link" class="round blue_coloured_element side_widgets_small">
+	<% form_for Resource.new, {:controller => :resources, :action => :create } do |f| %>
+		<div class="input_wrapper search_element">
+			<%= f.text_field :link, { :title => "..type/paste a link", :id => "search_box", :class => "search_element" } %></div>
+			<div class="actions bigbutton search_element" id="search_button">
+			<%= f.submit "Save a link", :name => nil, :id => "search_button", :class => "search_element" %>
+		</div>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $("input").labelify({ labelledClass: "text_label" });
+});
+</script>
+
+<style type="text/css">
+input.text_label { color: #545454; }
+</style>

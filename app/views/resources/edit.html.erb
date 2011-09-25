@@ -1,0 +1,12 @@
+<%= form_for(@resource) do |f| %>
+  <p>Rename the file:<%= f.text_field :upload, { :title => "Name of file" } %>
+	</P>
+	<p>
+	Add a note to your file. Anyone you share the file with will see the note.
+	
+    <%= f.text_field :note, { :title => "Add a note to your file" } %>
+	</p>
+  <div class="actions">
+    <%= f.submit "Update" %>
+  </div>
+<% end %>

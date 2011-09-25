@@ -1,0 +1,7 @@
+<div id="follow_form">
+  <% if resource.sharing_with?(user) %>
+    <%= render 'share' %>
+  <% else %>
+    <%= render 'unshare' %>
+  <% end %>
+</div>

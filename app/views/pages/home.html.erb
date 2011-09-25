@@ -1,0 +1,35 @@
+<% if signed_in? %>
+<div class="centred" id="home">
+	<div id="home_page_left">
+			<p>Welcome <%= current_user.name %>. You have used <%= number_to_human_size(@resource_allowance_used) %> of the <%= number_to_human_size(current_user.storage_allowance) %> allowance.</p>
+			<p><span>Current items in your intray:</span>
+			<span style="float: right;"><% refresh = image_tag("/images/refresh.png", :alt => "") %><%= link_to refresh, root_path %>
+			<%= link_to "Refresh list", root_path %></span></p>
+			<span style="font-size: 12px;">To save files, right-click on the name and select 'save as'</span>
+			<% if @resource_feed_items == nil && params[:search] == nil %>
+			<br><p>Upload a file or save a link with the tools on the right.<br>
+			Remember to refresh the list when you have done this</p>
+			<% end %>
+			
+			<% if params[:search] %>
+			<br><p>No resources were found to contain the phrase "<%= params[:search] %>" <br></p>
+			<% else %>
+			<%= will_paginate @resource_feed_items %>
+				<table class="file_list_table">
+						<%= render @resource_feed_items	 %>
+				</table>	
+		<%= will_paginate @resource_feed_items %>
+			<% end %>
+	</div>
+
+	<div id="home_page_right">
+		<%= render 'resources/mini_upload_widget' %>
+		<%= render 'resources/add_link' %>
+		
+		
+		
+	</div>
+</div>
+<% else %>
+<p style="margin-left: auto; margin-right: auto; text-align: center;">Yay intray!</p>
+<% end %>

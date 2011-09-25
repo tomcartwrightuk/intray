@@ -1,0 +1,14 @@
+<li>
+	<table class="resources bottom_align">
+  <tr>
+	<td><%= resource.id %><%= link_to resource.resource_file_name %></td>
+	<td><%= link_to "Download", resource.resource.url(:original, false) %></td>
+	<td>
+		<%= form_tag({:action => :share_file}, {:method => :post}) do %>
+		<%= hidden_field_tag :resource_id, resource.id %>
+	</td>
+			<td><div class="actions"><%= submit_tag "Share" %></div></td>
+		</tr>
+		</table>
+	<% end %>
+</li>

@@ -1,0 +1,22 @@
+<tr>
+  <td class="resource">
+    <span class="user">
+      <%= link_to resourcefeed_item.user.name, resourcefeed_item.user %>
+    </span>
+    <span class="content">
+		<%= link_to resourcefeed_item.resource_file_name %>
+<%= link_to "Download", resourcefeed_item.resource.url(:original, false) %>
+	</span>
+    
+		<span class="timestamp">
+      Posted <%= time_ago_in_words(resourcefeed_item.resource_updated_at) %> ago.
+    </span>
+  </td>
+  <% if current_user?(resourcefeed_item.user) %>
+  <td>
+    <%= link_to "delete", resourcefeed_item, :method => :delete,
+                                     :confirm => "You sure?",
+                                     :title => resourcefeed_item.resource_file_name %>
+  </td>
+  <% end %>
+</tr

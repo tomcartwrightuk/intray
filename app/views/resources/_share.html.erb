@@ -1,0 +1,6 @@
+<%= form_for @shared_item, :url => {:controller => :shared_items, :action => :create} do |f| %>
+	<%= f.hidden_field :shared_with_id, :value => @user_to_share.id %>
+	<%= f.hidden_field :resource_id, :value => @resource_id %>
+	<%= f.hidden_field :user_id, :value => current_user.id %>
+	<div class="actions"><%= f.submit "Share with this person" %></div>
+<% end %>

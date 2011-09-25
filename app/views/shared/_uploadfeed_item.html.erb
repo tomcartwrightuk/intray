@@ -1,0 +1,22 @@
+<tr>
+  <td class="upload">
+    <span class="user">
+      <%= link_to uploadfeed_item.user.name, uploadfeed_item.user %>
+    </span>
+    <span class="content">
+		<%= link_to uploadfeed_item.uploaded_file_name %>
+<%= link_to "Download", uploadfeed_item.uploaded.url(:original, false) %>
+	</span>
+    
+		<span class="timestamp">
+      Posted <%= time_ago_in_words(uploadfeed_item.uploaded_updated_at) %> ago.
+    </span>
+  </td>
+  <% if current_user?(uploadfeed_item.user) %>
+  <td>
+    <%= link_to "delete", uploadfeed_item, :method => :delete,
+                                     :confirm => "You sure?",
+                                     :title => uploadfeed_item.uploaded_file_name %>
+  </td>
+  <% end %>
+</tr>

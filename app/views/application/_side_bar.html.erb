@@ -1,0 +1,30 @@
+<div id="function_nav_bar" >
+	<div id="function_links">
+		<% if signed_in? %>
+		<table id="side_bar"><tr>
+		<td><%= link_to "Your intray", root_path %></td>
+		<td><%= link_to "Colleagues", users_path %></td>
+		<td id="side_bar_search_box"><div id="side_bar_search">
+			<% form_tag root_path, :method => 'get' do %>
+				<div class=""><%= text_field_tag :search, params[:search], :class => "search_elemen", :title => "..search files/links" %></div></td>
+					<div class="actions bigbutton" id="search_button">
+					<td id = "side_bar_search_button"><%= submit_tag "Search", :name => nil, :class => "" %></td>
+				</div>
+			<% end %>
+		</div>
+		</tr></table>
+		<% end %>
+	</div>
+		
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $(":text").labelify({ labelledClass: "labelHighlight" });
+});
+</script>
+
+<style type="text/css">
+input.labelHighlight { color: #545454; }
+</style>

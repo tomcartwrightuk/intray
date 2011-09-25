@@ -1,0 +1,23 @@
+
+<% if signed_in? %>
+<div class="centred" id="home">
+	<div id="home_page_left">
+			<p>Recent items added to your tray
+			<%= image_tag("/images/refresh.png", :alt => "") %>
+			<%= link_to "Refresh list", root_path %></p>
+			<%= will_paginate @resource_links %>
+		<table class="file_list_table">
+			<tr></tr>
+		<%= render @resource_links %>
+			<tr></tr>	
+			</table>
+			<%= will_paginate @resource_links %>
+	</div>
+	<div id="home_page_right">
+		<%= render 'shared/search_widget' %>
+		<%= render 'resources/add_link' %>
+	</div>
+</div>
+<% else %>
+Yay intray!
+<% end %>

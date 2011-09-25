@@ -1,0 +1,6 @@
+<% unless @resourcefeed_items.empty? %>
+  <table class="resourceposts" summary="User resource">
+    <%= render :partial => 'shared/resourcefeed_item', :collection => @resourcefeed_items %>
+  </table>
+  <%= will_paginate @resourcefeed_items %>
+<% end %>

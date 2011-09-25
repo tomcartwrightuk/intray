@@ -1,0 +1,23 @@
+<% if signed_in? %>
+<%= render 'shared/resource_links' %>
+
+<div class="centred" id="home">
+	<div id="home_page_left">
+			<p>Recent items added to your tray
+			<%= link_to "Refresh list", root_path %></p>
+			<%= will_paginate @resources %>
+		<table class="file_list_table">
+			<tr></tr>
+		<%= render @resources	 %>
+			<tr></tr>	
+			</table>
+			<%= will_paginate @resources %>
+	</div>
+	<div id="home_page_right">
+		<%= render 'shared/search_widget' %>
+		<%= render 'shared/mini_upload_widget' %>
+	</div>
+</div>
+<% else %>
+Yay intray!
+<% end %>

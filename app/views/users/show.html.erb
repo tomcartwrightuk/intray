@@ -1,0 +1,18 @@
+<table class="profile" summary="Profile information">
+  <tr>
+    <td class="main">
+      <h1>
+        <%= image_tag("/images/avatars/lightblue.png", :alt => @user.name, :class => "gravatar") %>
+        <%= @user.name %>
+      </h1>
+			<%= link_to "Edit profile", edit_user_path(current_user) %>
+      <%= render 'follow_form' if signed_in? %>
+    </td>
+    <td class="sidebar round">
+      <strong>Name</strong> <%= @user.name %><br />
+      <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+      <strong><br>Files shared</strong> <%= @user.shared_items.count %>
+      <%= render 'shared/stats' %>
+    </td>
+  </tr>
+</table>

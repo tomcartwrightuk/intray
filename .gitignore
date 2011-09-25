@@ -1,0 +1,7 @@
+.bundle
+log/*.log
+/tmp/
+/resource/
+/public/uploads/
+/db/production.sqlite3
+

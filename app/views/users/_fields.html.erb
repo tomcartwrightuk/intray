@@ -1,0 +1,57 @@
+
+
+<%= render 'shared/error_messages', :object => f.object %>
+  <div class="field input_wrapper">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, { :title => "First and last name" } %>
+  </div>
+  <div class="field input_wrapper"> 
+    <%= f.label :email %><br />
+    <%= f.text_field :email, { :title => "Email" } %>
+  </div>
+  <div class="field input_wrapper">
+    <%= f.label :password %><br />
+		<%= f.text_field :password_clear, { :value => "Password" } %>
+    <%= f.password_field :password, { :title => "Password" } %>
+  </div>
+  <div class="field input_wrapper">
+    <%= f.label :password_confirmation, "Confirmation" %><br />
+    <%= f.text_field :password_confirmation_clear, { :value => "Confirm password" } %>
+		<%= f.password_field :password_confirmation, { :title => "Password confirmation" } %>
+  </div>
+	<div class="field input_wrapper"> 
+    <%= f.label :sign_up_code %><br />
+    <%= f.text_field :sign_up_code, { :title => "Sign up code" } %>
+  </div>
+
+<script type="text/javascript">
+$('#user_password_clear').show();
+	$('#user_password').hide();
+	 
+$('#user_password_clear').focus(function() {
+	    $('#user_password_clear').hide();
+	    $('#user_password').show();
+	    $('#user_password').focus();
+	});
+	$('#user_password').blur(function() {
+	    if($('#user_password').val() == '') {
+	        $('#user_password_clear').show();
+	        $('#user_password').hide();
+	    }
+	});
+
+$('#user_password_confirmation_clear').show();
+	$('#user_password_confirmation').hide();
+	 
+$('#user_password_confirmation_clear').focus(function() {
+	    $('#user_password_confirmation_clear').hide();
+	    $('#user_password_confirmation').show();
+	    $('#user_password_confirmation').focus();
+	});
+	$('#user_password_confirmation').blur(function() {
+	    if($('#user_password_confirmation').val() == '') {
+	        $('#user_password_confirmation_clear').show();
+	        $('#user_password_confirmation').hide();
+	    }
+	});
+</script>

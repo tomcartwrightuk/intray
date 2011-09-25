@@ -1,0 +1,26 @@
+
+<% if @users.empty? %>
+	<%= link_to "Find", users_path %> your colleagues to start sharing resources with them! 
+<% else %>
+		<% @users.each do |user| %>
+			<table>
+				<tr>
+					<td><%= link_to gravatar_for(user, :size => 30), user %></td>
+					<td><%= user.name %></td>
+						<% @resource.shared_with?(user.id) %>
+						<% @user_to_share = user %>
+						<div id="follow_form">
+							<% if @resource.shared_with?(user.id) %>
+								<%= render '/resources/unshare' %>
+							<% else %>
+								<%= render 'resources/share' %>
+							<% end %>
+						</div>
+					</td>Files
+				</tr>
+			</table>
+		<% end %>
+<% end %>
+
+
+

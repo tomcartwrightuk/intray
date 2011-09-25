@@ -1,0 +1,14 @@
+<div id="function_nav_bar" class="">
+	<table>
+		<tr>
+			<td><%= render :partial => 'resources/uploadform_nonajax' %></td>
+		</tr>
+		<tr>
+			<td><%= link_to "My Files", { :controller => 'pages', :action => 'load_resource_partial' }, :remote => true %></td> 
+		</tr>
+		<tr>	
+			<td><%= link_to "People", { :controller => 'pages', :action => 'load_people_partial' }, :remote => true %></td>
+		</tr>
+	</table>
+</div>
+

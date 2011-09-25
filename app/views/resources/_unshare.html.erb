@@ -1,0 +1,5 @@
+
+	<%= form_for @resource.shared_items.find_by_shared_with_id(@user_to_share.id), :html => { :method => :delete } do |f| %>
+		<div class="actions"><%= f.hidden_field :resource_id, :value => @resource.id %>
+	<%= f.submit "Unshare" %></div>
+	<% end %>
