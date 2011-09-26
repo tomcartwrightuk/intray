@@ -195,6 +195,10 @@ nav ul li a:hover {
 	text-shadow: 0 1px 0 #172338;
 }
 
+.function_nav_links {
+width: 205px;
+}
+
 #function_nav_bar a:hover {
 	background-color: #E45821;
 	-moz-box-shadow: 1px 1px 4px  #333;
@@ -204,28 +208,29 @@ nav ul li a:hover {
 
 #side_bar tr td {
 	vertical-align: middle;
-	padding-left: 0;
-	padding-right: 0;
+	padding: 0em;
 }
 
+#side_bar a{
+	padding: 0em;
+}
 
+#resource_upload {
+	width: 150px;
 
+#search {
+	width:270px;
+}
 #side_bar_search {
 	display: inline;
 }
 #side_bar_search_box {
 	width: 40px;
 }
-#side_bar a {
-	padding: 0;
-}
 #side_bar_search_button	 {
 	width: 40px;
 }
 
-.function_nav_links {
-	width: 205px;
-}
 
 nav table {
 	vertical-align: middle !important;
@@ -291,6 +296,7 @@ nav table tr {
 	width: 320px;
 }
 
+
 #add_link {
 	margin-top: 20px;
 }
@@ -301,9 +307,6 @@ nav table tr {
 	margin-left: auto !important;
 }
 
-#search {
-	width: 275px;
-}
 #search_button {
 	width: 200px !important;
 	padding-left: 3px;
