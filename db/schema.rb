@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110918074144) do
+ActiveRecord::Schema.define(:version => 20110927171548) do
 
   create_table "file_sharing_relationships", :force => true do |t|
     t.integer  "sharer_id"
@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(:version => 20110918074144) do
     t.string   "link"
     t.string   "content_type"
     t.integer  "file_size"
+    t.string   "name"
   end
 
   create_table "shared_items", :force => true do |t|

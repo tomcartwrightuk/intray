@@ -42,20 +42,20 @@ class ResourcesController < ApplicationController
 	end
 	
   def create
-# 		flash[:success] = "File uploaded!"
-# 		redirect_to root_path
-# 		@resource.upload = params[:file]
-			@resource = current_user.resources.build(params[:resource])
-#     @resource = Resource.new(params[:resource])
-# 		@uploader = UploadUploader.new
-# 		@uploader.store!(params[:resource])
-    if @resource.save
-      flash[:success] = "File uploaded!"
-      redirect_to root_path
-    else
+		@resource = current_user.resources.build(params[:resource])
+
+    if params[:resource] == nil || params[:resource][:link] == ""
       @user = current_user
-			flash[:error] = "Error!"
-      redirect_to root_path	
+			flash[:error] = "Please select a file to upload or copy in a link."
+      redirect_to root_path
+		else
+			@resource.save
+			if params[:resource][:link]
+				flash[:success] = "Link saved"
+			else
+				flash[:success] = "File uploaded"
+			end
+      redirect_to root_path
     end
   end
 	

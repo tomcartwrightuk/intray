@@ -7,12 +7,12 @@ describe ResourcesController do
 
   before do
 		@user = Factory(:user)
-		@resource = @user.resources.build(File.open('spec/fixtures/50x50.png'))
+		@file = File.open('spec/fixtures/50x50.png')
+		@resource = @user.resources.build(@file)
 		@uploaded = @resource.save
 #     UploadUploader.enable_processing = true
 #     @uploader = UploadUploader.new(@resource, :upload)
 #     @file = @uploader.store!(File.open('spec/fixtures/50x50.png'))
-		
   end
 
   after do

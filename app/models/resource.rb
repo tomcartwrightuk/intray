@@ -4,7 +4,7 @@ class Resource < ActiveRecord::Base
   mount_uploader :upload, UploadUploader
 		validates :upload, 
 			:file_size => { :maximum => 40.megabytes } 
-	before_save :update_upload_attributes
+	before_save :update_upload_attributes, :add_name
 	has_many :shared_items, :dependent => :destroy
 	
 	def self.uploads_list
@@ -62,6 +62,14 @@ class Resource < ActiveRecord::Base
       self.file_size = upload.file.size
     end
   end
+	
+	def add_name
+		if upload.present?
+			self.name = self.upload.url
+		else
+			self.name = self.link
+		end
+	end
 
 end
 
