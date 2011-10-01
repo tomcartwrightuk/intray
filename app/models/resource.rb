@@ -65,7 +65,7 @@ class Resource < ActiveRecord::Base
 	
 	def add_name
 		if upload.present?
-			self.name = self.upload.url
+			self.name = self.upload_identifier
 		else
 			self.name = self.link
 		end

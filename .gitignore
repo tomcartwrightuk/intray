@@ -4,4 +4,4 @@ log/*.log
 /resource/
 /public/uploads/
 /db/production.sqlite3
-
+/Gemfile.lock
