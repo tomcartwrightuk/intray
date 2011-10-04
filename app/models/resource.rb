@@ -4,8 +4,9 @@ class Resource < ActiveRecord::Base
   mount_uploader :upload, UploadUploader
 		validates :upload, 
 			:file_size => { :maximum => 40.megabytes } 
-	before_save :update_upload_attributes, :add_name
+	before_save :update_upload_attributes, :add_reference
 	has_many :shared_items, :dependent => :destroy
+	validates :reference, :presence => true
 	
 	def self.uploads_list
 		where(:link => nil)
@@ -63,11 +64,9 @@ class Resource < ActiveRecord::Base
     end
   end
 	
-	def add_name
+	def add_reference
 		if upload.present?
-			self.name = self.upload_identifier
-		else
-			self.name = self.link
+			self.reference = self.upload_identifier
 		end
 	end
 
