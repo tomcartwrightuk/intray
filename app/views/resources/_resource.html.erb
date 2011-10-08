@@ -5,7 +5,7 @@
 		<%= image_tag("/images/linkicon.png", :alt => "Link") %>
 	</td>
 	<td class="file_name">
-			<%= link_to "#{truncate(resource.reference, :length => 50)}", resource.link %><br>
+		<%= link_to "#{truncate(resource.reference, :length => 50)}", resource.reference %><br>
 
 	<% else %>
 	<td class="icon_cell">

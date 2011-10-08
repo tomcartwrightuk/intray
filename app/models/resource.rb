@@ -66,7 +66,7 @@ class Resource < ActiveRecord::Base
 	
 	def add_reference
 		if upload.present?
-			self.reference = self.upload_identifier
+			self.reference = self.upload.url
 		end
 	end
 
