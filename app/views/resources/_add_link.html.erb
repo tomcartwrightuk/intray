@@ -1,4 +1,4 @@
-<div id="add_link" class="round blue_coloured_element side_widgets_small">
+<div id="add_link" class="round blue_coloured_element side_widgets_small shadow">
 	<% form_for Resource.new, {:controller => :resources, :action => :create } do |f| %>
 		<div class="input_wrapper search_element">
 			<%= f.hidden_field :resource_type, :value =>  "link" %>

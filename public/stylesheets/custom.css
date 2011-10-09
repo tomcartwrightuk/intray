@@ -4,7 +4,7 @@ body {
   /*background: -moz-linear-gradient(#66849e, #eee);
   background: -webkit-gradient(linear, left top, left bottom, from(#66849e), to(#eee));
   color: #000;*/
-	background: url("/images/greenpattern45_edit.jpg") repeat scroll 0 0 transparent;
+	background-color: #77a63c;
 }
 
 /* Header */
@@ -31,8 +31,7 @@ header img {
 section {
 	width: 100%;
   margin-top: 2em;
-/*   padding: 10px 5px 10px 5px; */
-	background-color: #FFF;
+	background: url("/images/paperbackground.jpg") repeat scroll 0 0 transparent
 }
 
 #header_greeting {
@@ -62,13 +61,23 @@ background: #EEE;
 }
 
 .blue_coloured_element {
-	background: #DCEFD9;
+/* 	background: #BBDA95; */
+	
+/* Fallback for web browsers that doesn't support RGBa */
+background: rgb(187, 218, 149) transparent;
+/* RGBa with 0.6 opacity */
+background: rgba(187, 218, 149, 0.4);
+/* For IE 5.5 - 7*/
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99BBDA95, endColorstr=#99BBDA95);
+/* For IE 8*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99BBDA95, endColorstr=#99BBDA95)";
+
 }
 
 .shadow {
-	-moz-box-shadow: 1px 1px 4px  #333;
-  -webkit-box-shadow: 1px 1px 4px #333;
-  box-shadow: 1px 1px 4px #333;
+	-moz-box-shadow: 2px 2px 4px  #777;
+  -webkit-box-shadow: 2px 2px 4px #777;
+  box-shadow: 2px 2px 4px #777;
 }
 .centred_content {
 	margin-right: auto;
@@ -282,13 +291,13 @@ nav table tr {
     float: right;
     height: 130px;
     padding: 5px;
-    width: 310px;
+    width: 335px;
 }
 
 #upload_wrapper_mini {
 	float: right;
 	height: 80px;
-	width: 320px;
+	width: 345px;
 }
 
 #add_link {
