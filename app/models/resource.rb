@@ -4,7 +4,7 @@ class Resource < ActiveRecord::Base
   mount_uploader :upload, UploadUploader
 		validates :upload, 
 			:file_size => { :maximum => 40.megabytes } 
-	before_save :update_upload_attributes, :add_reference
+	before_save :update_upload_attributes, :add_reference, :add_protocol_to_link
 	has_many :shared_items, :dependent => :destroy
 #	validates :reference, :presence => true
 	
@@ -67,6 +67,12 @@ class Resource < ActiveRecord::Base
 	def add_reference
 		if upload.present?
 			self.reference = self.upload
+		end
+	end
+	
+	def add_protocol_to_link
+		if self.resource_type == "link" && self.reference[0..6] != "http://"
+			self.reference = "http://" + self.reference
 		end
 	end
 
