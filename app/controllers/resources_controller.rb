@@ -44,11 +44,11 @@ class ResourcesController < ApplicationController
   def create
 		@resource = current_user.resources.build(params[:resource])
 
-#     if params[:resource] == nil || params[:resource][:link] == ""
-#       @user = current_user
-# 			flash[:error] = "Please select a file to upload or copy in a link."
-#       redirect_to root_path
-# 		else
+    if params[:upload] == nil || params[:resource][:reference] == ""
+      @user = current_user
+			flash[:error] = "Please select a file to upload or copy in a link."
+      redirect_to root_path
+		else
 			@resource.save
 			if params[:resource][:resource_type] == "link"
 				flash[:success] = "Link saved"
@@ -56,14 +56,14 @@ class ResourcesController < ApplicationController
 				flash[:success] = "File uploaded"
 			end
       redirect_to root_path
-#     end
+    end
   end
 	
 # 	def create
 #     @resource = current_user.resources.build(params[:resource])
 #     if @resource.save
 #       render :json => [ @resource.to_jq_upload ].to_json
- #     else 
+  #     else 
 #       render :json => [ @resource.to_jq_upload.merge({ :error => "custom_failure" }) ].to_json
 #     end
 #   end

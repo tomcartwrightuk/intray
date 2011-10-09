@@ -1,6 +1,7 @@
 <div class="blue_coloured_element round" id="upload_wrapper_mini">
 	<%= form_for Resource.new, :url => { :action => 'create', :controller => 'resources' }, :html => { :id => "new_resource_upload", :multipart => true }, do |f| %>
 		<%= f.file_field :upload %>
+		<%= f.hidden_field :resource_type, :value =>  "file" %>
 		<%= f.submit "Upload file" %>
 	<% end %>
 </div>
