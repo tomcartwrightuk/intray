@@ -6,7 +6,7 @@ class Resource < ActiveRecord::Base
 			:file_size => { :maximum => 40.megabytes } 
 	before_save :update_upload_attributes, :add_reference, :add_protocol_to_link
 	has_many :shared_items, :dependent => :destroy
-	validates :resource_type, :presence => true
+# 	validates :resource_type, :presence => true
 	
 	def self.uploads_list
 		where(:link => nil)

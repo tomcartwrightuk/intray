@@ -1,5 +1,7 @@
 Circl::Application.routes.draw do
 
+  resources :products
+
   resources :users do
     member do
       get :following, :followers
@@ -9,26 +11,26 @@ Circl::Application.routes.draw do
   resources :sessions, :only => [:new_sess, :create, :destroy]
   resources :microposts,    :only => [:create, :destroy]
   resources :relationships, :only => [:create, :destroy]
-	resources :file_sharing_relationships, :only => [:create, :destroy]
-	resources :resources
-	resources :shared_items
+  resources :file_sharing_relationships, :only => [:create, :destroy]
+  resources :resources
+  resources :shared_items
 	#, :key => :name - this can be used to change the indexing of the users
 
   root :to => "pages#home" 
   match '/contact', :to => 'pages#contact'
   match '/about',   :to => 'pages#about'
   match '/signup', :to => 'pages#home'
-	match '/new_sess', :to => 'sessions#new_sess'
+  match '/new_sess', :to => 'sessions#new_sess'
   match '/signin', :to => 'pages#home'
-	match '/help',    :to => 'pages#help'
+  match '/help',    :to => 'pages#help'
   match '/signout', :to => 'sessions#destroy'
-	match '/share_user_index' => 'resources#share_user_index'
-	match 'download' => 'resources#download'
-	match 'yourfiles' => 'resources#files'
+  match '/share_user_index' => 'resources#share_user_index'
+  match 'download' => 'resources#download'
+  match 'yourfiles' => 'resources#files'
   match 'sharedfiles' => 'resources#shared_files'
-	match 'yourlinks' => 'resources#links'
+  match 'yourlinks' => 'resources#links'
   match 'sharedlinks' => 'resources#shared_links'
-	
+  match 'resources/new' => 'resources#create', :via => :post
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

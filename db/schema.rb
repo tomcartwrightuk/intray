@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111003064858) do
+ActiveRecord::Schema.define(:version => 20111108181625) do
 
   create_table "file_sharing_relationships", :force => true do |t|
     t.integer  "sharer_id"
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(:version => 20111003064858) do
   add_index "file_sharing_relationships", ["shared_with_id"], :name => "index_file_sharing_relationships_on_shared_with_id"
   add_index "file_sharing_relationships", ["sharer_id"], :name => "index_file_sharing_relationships_on_sharer_id"
   add_index "file_sharing_relationships", ["upload_id"], :name => "index_file_sharing_relationships_on_upload_id"
+
+  create_table "products", :force => true do |t|
+    t.string   "reference"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "relationships", :force => true do |t|
     t.integer  "follower_id"

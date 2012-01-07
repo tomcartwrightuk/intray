@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  
+
+  respond_to :html, :xml, :json, :js  
+
   before_filter :authenticate, :except => [:show, :new, :create]
 # 	before_filter :authenticate, :only => [:edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
@@ -8,7 +10,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @title = @user.name
-		@user_to_follow = @user
+    @user_to_follow = @user
+    respond_with(@user) do |format|
+    	format.js  { render :json => @user, :callback => params[:callback] }
+    end
   end
 
   def index
@@ -16,6 +21,11 @@ class UsersController < ApplicationController
     @users = User.search(params[:search]).paginate(:page => params[:page])
 		@user = current_user
 # 		@user_to_follow = params[:user]
+    respond_to do |format|
+      format.html
+      format.xml { render :xml => @users }
+      format.json { render :json => @users }
+    end
   end
 
   def destroy

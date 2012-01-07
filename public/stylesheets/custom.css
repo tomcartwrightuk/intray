@@ -57,7 +57,15 @@ section h1 {
 }
 
 .coloured_element {
-background: #EEE;
+/* Fallback for web browsers that doesn't support RGBa */
+background: rgb(238, 238, 238) transparent;
+/* RGBa with 0.6 opacity */
+background: rgba(238, 238, 238, 0.4);
+/* For IE 5.5 - 7*/
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99eeeeee, endColorstr=#99eeeeee);
+/* For IE 8*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99eeeeee, endColorstr=#99eeeeee)";
+
 }
 
 .blue_coloured_element {

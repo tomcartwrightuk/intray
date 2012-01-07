@@ -44,7 +44,7 @@ class ResourcesController < ApplicationController
   def create
 		@resource = current_user.resources.build(params[:resource])
 
-    if params[:upload] == nil || params[:resource][:reference] == ""
+    if params[:upload] == nil
       @user = current_user
 			flash[:error] = "Please select a file to upload or copy in a link."
       redirect_to root_path
