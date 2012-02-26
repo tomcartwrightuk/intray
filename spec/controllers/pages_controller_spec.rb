@@ -11,11 +11,10 @@ describe PagesController do
     it "should have the right title" do
       get 'home'
       response.should have_selector("title",
-                        :content =>
-                          "Intray")
+                        :content => "Intray")
     end
 		
-		describe "when not signed in" do
+    describe "when not signed in" do
 
       before(:each) do
         get :home
@@ -32,15 +31,17 @@ describe PagesController do
     end
 
     describe "when signed in" do
-
       before(:each) do
         @user = test_sign_in(Factory(:user))
         other_user = Factory(:user, :email => Factory.next(:email))
         other_user.follow!(@user)
       end
 
-
-		end
+      it "should have a list of resources" do
+        get :home
+        response.should have_selector('table', :class => 'file_list_table')
+      end
+    end
     
   end
 
@@ -63,7 +64,7 @@ describe PagesController do
       response.should be_success
     end
 		
-		it "should have the right title" do
+    it "should have the right title" do
       get 'about'
       response.should have_selector("title", :content => "Intray | About")
     end

@@ -42,9 +42,9 @@ class User < ActiveRecord::Base
 	
   has_many :resources
 	has_many :shared_items
-	has_many :shared_with_resources,	:foreign_key => "shared_with_id",
-																		:class_name => "SharedItem",
-																		:dependent => :destroy
+	has_many :shared_with_resources, :foreign_key => "shared_with_id",
+          :class_name => "SharedItem",
+	  :dependent => :destroy
 	
 #   has_many :file_sharings, :foreign_key => "sharer_id",
 #                            :dependent => :destroy

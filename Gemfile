@@ -9,8 +9,8 @@ gem 'carrierwave'
 gem 'jquery-rails'
 gem 'rack-raw-upload'
 gem 'fog'
-# gem "json_pure", "~> 1.6.1"	
 gem 'grape', '~> 0.1.5'
+gem 'shoulda-matchers'
 
 group :development do
   gem 'rspec-rails', '2.6.0'

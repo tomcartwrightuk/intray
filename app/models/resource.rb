@@ -1,34 +1,34 @@
  require 'file_size_validator'
 class Resource < ActiveRecord::Base
 	belongs_to :user
-  mount_uploader :upload, UploadUploader
-		validates :upload, 
-			:file_size => { :maximum => 40.megabytes } 
+        mount_uploader :upload, UploadUploader
+        validates :upload, 
+          :file_size => { :maximum => 40.megabytes } 
 	before_save :update_upload_attributes, :add_reference, :add_protocol_to_link
 	has_many :shared_items, :dependent => :destroy
 # 	validates :resource_type, :presence => true
 	
 	def self.uploads_list
-		where(:link => nil)
+          where(:link => nil)
 	end
 	
 	def self.links_list
-		where(:upload => nil)
+          where(:upload => nil)
 	end
 	
 	def self.shared_resources(user)
-		where("resources.user_id != ?", user)
+          where("resources.user_id != ?", user)
 	end
 	
 	def shared_with?(user_id)
-		shared_items.find_by_shared_with_id(user_id)
-  end
+          shared_items.find_by_shared_with_id(user_id)
+        end
 	
 	include Rails.application.routes.url_helpers
 	
 	def self.search(search)
-		if search
-			find(:all, :conditions => ['upload LIKE ? OR link LIKE ?', "%#{search}%", "%#{search}%"])
+          if search
+            find(:all, :conditions => ['upload LIKE ? OR link LIKE ?', "%#{search}%", "%#{search}%"])
 		else
 			find(:all)
 		end

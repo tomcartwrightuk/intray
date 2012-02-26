@@ -92,15 +92,15 @@ describe User do
   
     describe "has_password? method" do
       it "should exist" do
-				@user.should respond_to(:has_password?)
-			end
+        @user.should respond_to(:has_password?)
+      end
       
       it "should return true if passwords match" do
-				@user.has_password?(@attr[:password]).should be_true
+	@user.has_password?(@attr[:password]).should be_true
       end
       
       it "should return false if the passwords don't match" do
-				@user.has_password?("invalid").should be_false
+	@user.has_password?("invalid").should be_false
       end
     end
     
@@ -147,78 +147,26 @@ describe User do
     end
   end
 	
-#   describe "micropost associations" do
+  describe "resource associations" do
 
-#     before(:each) do
-#       @user = User.create(@attr)
-#       @mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago)
-#       @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago)
-#     end
+    before(:each) do
+      @user = User.create(@attr)
+    end
 
-#     it "should have a microposts attribute" do
-#       @user.should respond_to(:microposts)
-#     end
-# 		
-#     it "should have the right microposts in the right order" do
-#       @user.microposts.should == [@mp2, @mp1]
-#     end
-		
-#     it "should destroy a users microposts" do
-#       @user.destroy
-#       [@mp1, @mp2].each do |micropost|
-# 	Micropost.find_by_id(micropost.id).should be_nil
-#       end
-#     end
-      
-#     describe "status feed" do
-
-#       it "should have a feed" do
-#         @user.should respond_to(:feed)
-#       end
-
-#       it "should include the user's microposts" do
-#         @user.feed.should include(@mp1)
-#         @user.feed.should include(@mp2)
-#       end
-
-#       it "should not include a different user's microposts" do
-#         mp3 = Factory(:micropost,
-#                       :user => Factory(:user, :email => Factory.next(:email)))
-#         @user.feed.should_not include(mp3)
-#       end
-
-#       it "should include the microposts of followed users" do
-#         followed = Factory(:user, :email => Factory.next(:email))
-#         mp3 = Factory(:micropost, :user => followed)
-#         @user.follow!(followed)
-#         @user.feed.should include(mp3)
-#       end
-			
-#     end
-# 	end		
-	
-	describe "uploads associations" do
-
-		before(:each) do
-			@user = User.create(@attr)
-	# 			@mp1 = Factory(:micropost, :user => @user, :created_at => 1.day.ago)
-	#       @mp2 = Factory(:micropost, :user => @user, :created_at => 1.hour.ago)
-		end
-
-		it "should have a uploads attribute" do
-			@user.should respond_to(:resources)
-		end
-	end
-	
-	describe "resources_shared_with associations" do
-		before(:each) do
-			@user = User.create(@attr)
-		end
-		
-		it "should have a shared_with_resources attribute" do
-			@user.should respond_to(:shared_with_resources)
-		end
-	end
+    it "should have a uploads attribute" do
+      @user.should respond_to(:resources)
+    end
+  end
+  
+  describe "resources_shared_with associations" do
+    before(:each) do
+      @user = User.create(@attr)
+    end
+    
+    it "should have a shared_with_resources attribute" do
+      @user.should respond_to(:shared_with_resources)
+    end
+  end
 	
   describe "relationships" do
 
@@ -278,14 +226,4 @@ describe User do
     end
   end
   
-#   describe "file_sharing_relationships" do
-#      before(:each) do
-#       @user = User.create!(@attr)
-#       @shared_with = Factory(:user)
-#     end
-# 
-#     it "should have a file_sharing_relationships method" do
-#       @user.should respond_to(:file_sharing_relationships)
-#     end
-#   end
 end
