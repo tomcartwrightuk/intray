@@ -9,9 +9,7 @@ module ApplicationHelper
     end
   end
 	
-	def resource
-		resource = Resource.new
-# 		@resource = Resource.new
-# 		render '/layouts/side_bar'
-	end 
+  def resource
+    resource = Resource.new
+  end 
 end

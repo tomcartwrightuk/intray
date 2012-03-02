@@ -5,7 +5,8 @@ Thought dump:
 - Check that all code is coorectly indented
 - Create a new repo
 - 
-
+To change the follower/followed relationship model:
+	- change to  one-time following relationship where you 
 
 Users:
 

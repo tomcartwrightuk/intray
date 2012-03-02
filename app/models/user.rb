@@ -45,20 +45,6 @@ class User < ActiveRecord::Base
 	has_many :shared_with_resources, :foreign_key => "shared_with_id",
           :class_name => "SharedItem",
 	  :dependent => :destroy
-	
-#   has_many :file_sharings, :foreign_key => "sharer_id",
-#                            :dependent => :destroy
-
-#   has_many :file_sharing_relationships, :foreign_key => "sharer_id",
-#                            :dependent => :destroy
-#   has_many :sharing, :through => :file_sharing_relationships, :source => :shared_with_id
-# 	
-#   has_many :file_sharing_reverse_relationships, :foreign_key => "shared_with_id",
-#                                    :class_name => "File_sharing_relationship",
-#                                    :dependent => :destroy
-#   has_many :sharers, :through => :reverse_relationships, :source => :sharer_id
-  
-  
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
@@ -73,22 +59,19 @@ class User < ActiveRecord::Base
                                           
   before_save :encrypt_password
   
-	def self.search(search)
-		if search
-			find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-		else
-			find(:all)
-		end
-	end
+  def self.search(search)
+    if search
+      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+    else
+      find(:all)
+    end
+  end
 
-
-	
   def has_password?(submitted_password)
     encrypted_password == encrypt(submitted_password)  
   end
   
   def User.authenticate(email, submitted_password)
-#     This first line could be: user = find_by_email(email) - change if problems occur in the future
     user = User.find_by_email(email)
     return nil if user.nil?
     return user if user.has_password?(submitted_password)
@@ -115,15 +98,15 @@ class User < ActiveRecord::Base
     relationships.find_by_followed_id(followed).destroy
   end
   
-	def allowance_used(resources)
-		space = 0
-		resources.each do |resource|
-        if resource.file_size 
-					space += resource.file_size
-				end
+  def allowance_used(resources)
+    space = 0
+    resources.each do |resource|
+    if resource.file_size 
+      space += resource.file_size
+    end
     end
     return space
-	end
+  end
 	
   private
   

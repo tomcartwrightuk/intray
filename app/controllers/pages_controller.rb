@@ -11,7 +11,6 @@ class PagesController < ApplicationController
     else
     @user = User.new
     end
-		
   end
 	
   def contact

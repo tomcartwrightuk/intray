@@ -1,6 +1,5 @@
 class SharedItemsController < ApplicationController
-	
-	before_filter :authenticate
+  before_filter :authenticate
 
   def create
     @users = current_user.following
@@ -13,14 +12,12 @@ class SharedItemsController < ApplicationController
       redirect_to @resource
     end
   end
-	
 
   def destroy
-		@users = current_user.following
-		@resource = Resource.find_by_id(params[:shared_item][:resource_id])
+    @users = current_user.following
+    @resource = Resource.find_by_id(params[:shared_item][:resource_id])
     SharedItem.find(params[:id]).destroy
-		redirect_to @resource
-
-	end
+    redirect_to @resource
+  end
 	
 end

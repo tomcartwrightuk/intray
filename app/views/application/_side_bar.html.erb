@@ -1,11 +1,11 @@
 <div id="function_nav_bar" >
-	<div id="function_links">
-		<% if signed_in? %>
-		<table id="side_bar"><tr>
-		<td class="function_nav_links"><%= link_to "Your intray", root_path %></td>
-		<td class="function_nav_links"><%= link_to "Colleagues", users_path %></td>
-		<td></td>
-		<td id="side_bar_search_box"><div id="side_bar_search">
+    <div id="function_links">
+      <% if signed_in? %>
+      <table id="side_bar"><tr>
+      <td class="function_nav_links"><%= link_to "Your intray", root_path %></td>
+      <td class="function_nav_links"><%= link_to "Colleagues", users_path %></td>
+      <td></td>
+      <td id="side_bar_search_box"><div id="side_bar_search">
 			<%= form_tag root_path, :method => 'get' do %>
 				<div class=""><%= text_field_tag :search, params[:search], :class => "search_elemen", :title => "..search files/links" %></div></td>
 					<div class="actions bigbutton" id="search_button">

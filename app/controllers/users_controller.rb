@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   respond_to :html, :xml, :json, :js  
 
   before_filter :authenticate, :except => [:show, :new, :create]
-# 	before_filter :authenticate, :only => [:edit, :update]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user,   :only => :destroy
   
@@ -12,15 +11,14 @@ class UsersController < ApplicationController
     @title = @user.name
     @user_to_follow = @user
     respond_with(@user) do |format|
-    	format.js  { render :json => @user, :callback => params[:callback] }
+      format.js  { render :json => @user, :callback => params[:callback] }
     end
   end
 
   def index
     @title = "Intray users"
     @users = User.search(params[:search]).paginate(:page => params[:page])
-		@user = current_user
-# 		@user_to_follow = params[:user]
+    @user = current_user
     respond_to do |format|
       format.html
       format.xml { render :xml => @users }
@@ -40,15 +38,15 @@ class UsersController < ApplicationController
   end
   
   def create
-		@pass_phrase = params[:user][:sign_up_code]
+    @pass_phrase = params[:user][:sign_up_code]
     @user = User.new(params[:user])
     if @pass_phrase == 'henry'
-			@user.save
+      @user.save
       sign_in @user
       redirect_to root_path, :flash => { :success => "Welcome to the Intray!" }
     else
       @title = "Sign up"
-			flash[:error] = "Check the sign-up code - is it correct?"
+      flash[:error] = "Check the sign-up code - is it correct?"
       render 'pages/home'
     end
   end
@@ -85,10 +83,6 @@ class UsersController < ApplicationController
 	
   
   private
-  
-# 	def admin_user
-# 		redirect_to(root_path) unless current_user.admin?
-# 	end
 	
   def admin_user
     @user = User.find(params[:id])

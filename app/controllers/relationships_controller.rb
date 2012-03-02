@@ -3,12 +3,12 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:relationship][:followed_id])
-		if current_user.follow!(@user)
-			 redirect_to users_path
-		else
-			flash[:error] = "There has been an error - try again"
-			redirect_to users_path
-		end
+    if current_user.follow!(@user)
+      redirect_to users_path
+    else
+      flash[:error] = "There has been an error - try again"
+      redirect_to users_path
+    end
   end
 
   def destroy
