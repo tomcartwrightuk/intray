@@ -40,8 +40,7 @@ class UsersController < ApplicationController
   def create
     @pass_phrase = params[:user][:sign_up_code]
     @user = User.new(params[:user])
-    if @pass_phrase == 'henry'
-      @user.save
+    if @pass_phrase == 'henry' && @user.save 
       sign_in @user
       redirect_to root_path, :flash => { :success => "Welcome to the Intray!" }
     else

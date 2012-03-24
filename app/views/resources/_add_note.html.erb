@@ -1,9 +1,13 @@
 <div class="" id="add_note">
-	<% form_for(@resource) do |f| %>
-		<div class="">
-			<%= f.text_field :note, { :title => "Add a note to the file" } %></div>
-			<div class="actions">
-			<%= f.submit "Add note", :name => nil, :id => "add_note_button" %>
-		</div>
-	<% end %>
+  <% form_for(@resource) do |f| %>
+    <div class="">
+      <%= f.text_field :note %></div><br />
+      <div class="actions">
+      <% if @resource.note %>
+        <%= f.submit "Update note", :name => nil, :id => "add_note_button" %>
+      <% else %>
+        <%= f.submit "Add note", :name => nil, :id => "add_note_button" %>
+      <% end %>
+    </div>
+  <% end %>
 </div>

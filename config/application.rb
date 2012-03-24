@@ -8,6 +8,7 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Circl
   class Application < Rails::Application
+    Dir[File.join(Rails.root, "lib", "ext", "*.rb")].each {|l| require l }
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

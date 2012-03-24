@@ -9,8 +9,8 @@ describe UsersController do
     
     describe "for non-signed in users" do
       it "should deny access and redirect to the user signin pages" do
-			get :index
-				response.should redirect_to(signin_path)      
+        get :index
+        response.should redirect_to(signin_path)      
       end
     end
     
@@ -21,7 +21,7 @@ describe UsersController do
         second = Factory(:user, :name => "Bob", :email => "another@example.com")
         third  = Factory(:user, :name => "Ben", :email => "another@example.net")
 
-				@users = [@user, second, third]
+        @users = [@user, second, third]
         30.times do
           @users << Factory(:user, :email => Factory.next(:email))
         end
@@ -174,8 +174,8 @@ describe UsersController do
   describe "GET 'edit'" do
     
     before(:each) do 
-	@user = Factory(:user)
-	test_sign_in(@user)
+      @user = Factory(:user)
+      test_sign_in(@user)
     end
     
     it "should be successful" do 

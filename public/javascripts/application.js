@@ -2,6 +2,16 @@
 // // This file is automatically included by javascript_include_tag :defaults
 // 
 
+$(function() {
+	$('#add_note').hide();
+	$('#noteheading').hide();
+	$('#addnotebutton').click(function() {
+		$('#add_note').show(300);
+		$('#noteheading').show(200);
+		$('#addnotebutton').hide();
+		$('#note').hide();
+	})
+});
 
 $('#user_password_clear').show();
 	$('#user_password').hide();

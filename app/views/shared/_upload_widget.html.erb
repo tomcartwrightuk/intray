@@ -1,7 +1,6 @@
 <div class="coloured_element round" id="upload_wrapper">
 	<div id="fileupload">
 		
-		<%= stylesheet_link_tag 'jquery.fileupload-ui' %>
 			<h4>Upload files</h4>
         <%= form_for Resource.new, :html => { :multipart => true } do |f| %>
             <div class="fileupload-buttonbar">

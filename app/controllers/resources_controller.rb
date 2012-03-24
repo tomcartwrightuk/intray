@@ -1,58 +1,27 @@
 class ResourcesController < ApplicationController
   before_filter :authenticate
-  before_filter :correct_user
+  #before_filter :correct_user
 	
   def index
-    @title = "Your files"
-    @users_resources = current_user.resources
-    @resource_allowance_used = current_user.allowance_used(@users_resources)
-    @resources = current_user.resources.search(params[:search]).paginate(:page => params[:page])
-    @shared_items = current_user.shared_with_resources
-    @resources_uploads = current_user.resources.uploads_list.paginate(:page => params[:page])
     @resource_feed_items = current_user.resource_feed.search(params[:search]).paginate(:page => params[:page])
   end
 	
-  def files
-    @title = "Your files"
-    @resource = Resource.new
-    @resources = current_user.resources.uploads_list.search(params[:search]).paginate(:page => params[:page])	
-    render 'resources/index_temp'
-  end
-	
-  def links
-    @resource = Resource.new 
-    @title = "Links"
-    @resources = current_user.resources.links_list.paginate(:page => params[:page])
-    render 'resources/index_temp'
-  end
-	
-  def shared_files
-    @title = "Shared files"
-    @resource = Resource.new
-    @resources = current_user.resource_feed.shared_resources(current_user).uploads_list.search(params[:search]).paginate(:page => params[:page])
-    render 'resources/index_temp'
-  end
-	
-  def shared_links
-    @title = "Shared links"
-    @resource = Resource.new
-    @resources = current_user.resource_feed.shared_resources(current_user).links_list.search(params[:search]).paginate(:page => params[:page])
-    render 'resources/index_temp'
-  end
-	
   def create
-    @resource = current_user.resources.build(params[:resource])
-    if (params[:resource][:upload] == nil) && (params[:resource][:reference] == "")
-      @user = current_user
-      flash[:error] = "Please select a file to upload or copy in a link."
+    error_message = 'Please select a file or copy in a link'
+    if params[:resource].params_link?
+      @resource = current_user.resources.update_if_present_or_create(params[:resource][:reference])
+      if @resource
+        flash[:success] = "Link saved!" 
+      else
+        flash[:error] = error_message
+      end
+    else
+      @resource = current_user.resources.create(params[:resource])
+    end
+    if @resource
       redirect_to root_path
     else
-      @resource.save
-      if params[:resource][:resource_type] == "link"
-        flash[:success] = "Link saved"
-      else
-        flash[:success] = "File uploaded"
-      end
+      flash[:error] = error_message
       redirect_to root_path
     end
   end

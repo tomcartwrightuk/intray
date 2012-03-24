@@ -19,10 +19,10 @@
 });
 </script>
 
-<%= form_for @upload, :html => { :multipart => true } do |f| %>
+<%= form_for Resource.new, :html => { :multipart => true } do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 
-		<%= f.file_field :uploaded %>
+		<%= f.file_field :upload %>
 		<%= f.submit "Upload" %>
 		<div>Upload files</div>
 <% end %>

@@ -101,9 +101,9 @@ class User < ActiveRecord::Base
   def allowance_used(resources)
     space = 0
     resources.each do |resource|
-    if resource.file_size 
-      space += resource.file_size
-    end
+      if resource.file_size 
+        space += resource.file_size
+      end
     end
     return space
   end

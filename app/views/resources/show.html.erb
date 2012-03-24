@@ -1,4 +1,3 @@
-
 <% if @users.empty? %>
 	<%= link_to "Find", users_path %> your colleagues to start sharing resources with them! 
 <% else %>
@@ -8,28 +7,30 @@
 <table class="blue_coloured_element resource_to_share	centred_content">
 	<tr>
 		<td class="icon_cell">
-		<% if @resource.link %>
+		<% if @resource.link? %>
 			<%= image_tag("/images/linkicon.png", :alt => "Link") %>
 		<td>
-			<%= link_to "#{truncate(@resource.link, :length => 50)}", @resource.link %>
+			<%= link_to "#{truncate(@resource.reference, :length => 50)}", @resource.reference %>
 		</td>
 		<% else %>
 			<%= image_tag("/images/fileicon.png", :alt => "Link") %>
 		</td>
 		<td class="file_name">
 			<%= link_to "#{File.basename(@resource.upload_identifier.to_s)}", { :action => :download, :id => @resource.id }  %>
-			- <%= number_to_human_size(@resource.upload.size) %>
+			- <%= number_to_human_size(@resource.file_size) %>
 		</td>
 		<% end %>
 	</tr>
 	<tr>
-		<td>Note:</td>
+		<td></td>
 		<td>
-			<% if @resource.note %>
-			<%= @resource.note %>
-			<% else %>
-			<%= render 'resources/add_note' %>
-			<% end %>
+                <% if @resource.note %>
+                  <span id="note"><%= @resource.note %></span>
+                  <span id="addnotebutton" class="ajax_link">- Edit note</span>
+                <% else %>
+                  <span id="addnotebutton" class="ajax_link">Add a note</span>
+                <% end %>
+                  <%= render 'resources/add_note' %>
 		</td>
 	</tr>
 </table>

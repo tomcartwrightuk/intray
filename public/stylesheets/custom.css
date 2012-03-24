@@ -121,6 +121,12 @@ input.text_label {
 	color: red;
 }
 
+.ajax_link {
+  color: #265666;
+  cursor: pointer;
+} 
+  
+
 /* About and contact pages */
 
 .tag_line {
@@ -760,10 +766,11 @@ td.file_name {
 }
 
 td.share_link {
-	width: 40px;
+	width: 120px;
+        text-align: right;
 }
 td.delete_link {
-	width: 40px;
+	width: 120px;
 }
 
 
