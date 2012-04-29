@@ -11,20 +11,23 @@
  */
 
 #upload_wrapper_mini {
-	width: 300px;
-	float: right;
-	padding: 15px 0px 20px 0px;
-	background-color: #DCEFD9;
-	margin-top: 20px;
+  float: right;
+  padding: 15px 0px 20px 0px;
+  margin-top: 20px;
+  height: 100%;
+}
+
+#upload_wrapper_mini tr:nth-child(even) td, tbody tr.even td {
+  background: 0;
 }
 
 .mini_upload_table {
-	width: 270px !important;
+	width: 300px !important;
 	font-size: 12px !important;
 }
 
 .mini_upload_table .files {
-	width: 270px !important;
+	width: 300px !important;
 }
 
 #fileupload {
@@ -89,6 +92,7 @@
 }
 
 .files {
+  table-layout: fixed;
   margin: 10px 0;
   border-collapse: collapse;
 }
@@ -103,9 +107,9 @@
 }
 
 .files .name {
-/*   padding: 0 10px; */
-	width: 150px !important;
-	height: 30px;
+  word-wrap: break-word;
+  width: 150px !important;
+  height: 30px;
 }
 
 .files .size {
@@ -129,13 +133,10 @@
 }
 
 #template-upload {
-	width: 240px;
 }
 
 .template-upload {
-	width: 240px;
 }
 
 .template-download {
-	width: 240px;
 }

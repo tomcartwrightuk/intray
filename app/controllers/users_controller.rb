@@ -38,9 +38,8 @@ class UsersController < ApplicationController
   end
   
   def create
-    @pass_phrase = params[:user][:sign_up_code]
     @user = User.new(params[:user])
-    if @pass_phrase == 'henry' && @user.save 
+    if @user.save 
       sign_in @user
       redirect_to root_path, :flash => { :success => "Welcome to the Intray!" }
     else
@@ -77,6 +76,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @users = @user.followers.paginate(:page => params[:page])
     render 'show_follow'
+  end
+
+  def uploader_toggle
+    current_user.toggle!(:uploader_option)
+    redirect_to root_path
   end
 	
 	

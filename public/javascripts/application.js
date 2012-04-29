@@ -11,7 +11,14 @@ $(function() {
 		$('#addnotebutton').hide();
 		$('#note').hide();
 	})
+	$(document).ready(function(){
+	  $(":text").labelify({ labelledClass: "labelHighlight" });
+	});
 });
+
+
+
+
 
 $('#user_password_clear').show();
 	$('#user_password').hide();

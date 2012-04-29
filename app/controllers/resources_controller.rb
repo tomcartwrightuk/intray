@@ -9,17 +9,30 @@ class ResourcesController < ApplicationController
   def create
     error_message = 'Please select a file or copy in a link'
     if params[:resource].params_link?
-      @resource = current_user.resources.update_if_present_or_create(params[:resource][:reference])
-      if @resource
-        flash[:success] = "Link saved!" 
-      else
-        flash[:error] = error_message
-      end
+      @resource = current_user.resources.update_if_present_or_create(params[:resource])
     else
       @resource = current_user.resources.create(params[:resource])
     end
-    if @resource
-      redirect_to root_path
+
+    @resource_feed_items = current_user.resource_feed.search(params[:search]).paginate(:page => params[:page])
+    if @resource && params[:resource].params_link?
+      respond_to do |format|
+        format.html { redirect_to root_path }
+        format.js
+      end
+      flash[:success] = "Link saved!" 
+    elsif @resource
+
+      respond_to do |format|
+        format.html {  
+          flash[:success] = "Link saved"
+          redirect_to root_path
+        }
+        format.json {  
+          render :json => [@resource.to_jq_upload].to_json			
+        }
+      end
+      flash[:success] = "File saved!" 
     else
       flash[:error] = error_message
       redirect_to root_path

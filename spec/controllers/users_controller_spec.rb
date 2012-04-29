@@ -292,7 +292,7 @@ describe UsersController do
     end
   end
 	
-	describe "DELETE 'destroy'" do
+  describe "DELETE 'destroy'" do
 
     before(:each) do
       @user = Factory(:user)
@@ -313,7 +313,7 @@ describe UsersController do
 #       end
 #     end
 		
-		describe "as non-admin user" do
+    describe "as non-admin user" do
       it "should protect the action" do
         test_sign_in(@user)
         delete :destroy, :id => @user
@@ -341,7 +341,7 @@ describe UsersController do
     end
   end
 	
-	describe "follow pages" do
+  describe "follow pages" do
 
     describe "when not signed in" do
 
@@ -376,5 +376,15 @@ describe UsersController do
                                            :content => @user.name)
       end
     end
+  end
+  
+  describe "uploader_pref" do
+    
+    it "should toggle the pref off" do
+    end
+    
+    it "should togggle the pref on" do
+    end
+
   end
 end

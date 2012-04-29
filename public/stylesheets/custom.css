@@ -29,9 +29,9 @@ header img {
 }
 
 section {
-	width: 100%;
+  width: 100%;
   margin-top: 2em;
-	background: url("/images/paperbackground.jpg") repeat scroll 0 0 transparent
+  background: url("/images/creambackground_light_flat.jpg") repeat scroll 0 0 transparent
 }
 
 #header_greeting {
@@ -57,15 +57,10 @@ section h1 {
 }
 
 .coloured_element {
-/* Fallback for web browsers that doesn't support RGBa */
-background: rgb(238, 238, 238) transparent;
-/* RGBa with 0.6 opacity */
-background: rgba(238, 238, 238, 0.4);
-/* For IE 5.5 - 7*/
-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99eeeeee, endColorstr=#99eeeeee);
-/* For IE 8*/
--ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99eeeeee, endColorstr=#99eeeeee)";
-
+  background: #BBDA95 transparent;
+  background: rgba(187, 218, 149, 0.4);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99BBDA95, endColorstr=#99BBDA95);
+  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99BBDA95, endColorstr=#99BBDA95)";
 }
 
 .blue_coloured_element {
@@ -116,7 +111,7 @@ filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99BBDA95, endCo
 .block {
 	display: block;
 }
-
+input.labelHighlight { color: #545454; }
 input.text_label {
 	color: red;
 }
@@ -369,7 +364,6 @@ form .input_wrapper.blurred input, form .input_wrapper.filled input {
 
 #signupform { 
 	height: 364px;
-	padding: 0px 0px 0px 20px
 }
 
 #signupform label, .edit_user label, .field label {
@@ -452,9 +446,8 @@ display: none;
 form .input_wrapper {
     background: url("/images/input.png") no-repeat scroll 0 11px transparent;
     border-width: 0;
-/*     float: left; */
     height: 64px;
-/*     margin: 0 0 0 -13px; */
+    margin: auto;
     position: relative;
     width: 219px;
 }
@@ -488,23 +481,18 @@ form .input_wrapper {
 
 
 .actions input {
-    
     border: 1px solid #2A3F56;
     border-radius: 6px 6px 6px 6px;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(255, 255, 255, 0.7) inset;
-/*     color: rgba(0, 0, 0, 0.63); */
     cursor: pointer;
     display: block;
     float: left;
     font-family: Arial,'Helvetica Neue',Helvetica,sans-serif;
-    
-/*     margin: 12px 0 30px 4px; */
     opacity: 0.9;
     padding: 1px 30px 3px 15px;
     position: relative;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.37);
     white-space: nowrap;
-		
+    margin: auto;
 }
 
 /* Round corners */
@@ -601,7 +589,8 @@ td.sidebar {
 }
 
 div.field, div.actions {
-/*   margin-bottom: 10px; */
+  margin: auto;
+  overflow: auto;
 }
 
 .field_with_errors {

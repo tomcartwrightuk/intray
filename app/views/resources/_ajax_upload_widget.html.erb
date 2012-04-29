@@ -1,0 +1,95 @@
+<div class="coloured_element round" id="upload_wrapper_mini">
+	<div id="fileupload" class="mini_upload_table">
+		<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/themes/base/jquery-ui.css" id="theme">
+		<%= stylesheet_link_tag 'jquery.fileupload-mini-ui' %>
+			<h4>Upload files</h4>
+        <%= form_for Resource.new, :html => { :multipart => true } do |f| %>
+            <div class="fileupload-buttonbar">
+                <label class="fileinput-button">
+                    <span>Add files...</span>
+                            <%= f.file_field :upload %>
+                </label>
+            </div>
+        <% end %>
+        <div class="fileupload-content">
+            <table class="files"></table>
+            <div class="fileupload-progressbar"></div>
+        </div>
+    </div>
+    <script id="template-upload" type="text/x-jquery-tmpl">
+        <tr class="template-upload{{if error}} ui-state-error{{/if}}">
+            <td class="name" id="name_link">${name}</td>
+            <td class="size">${sizef}</td>
+            {{if error}}
+                <td class="error" colspan="2">Error:
+                    {{if error === 'custom_failure'}}Custom Error Message
+                    {{else}}${error}
+                    {{/if}}
+                </td>
+            {{else}}
+                <div></div><
+            {{/if}}
+            <td class="cancel"><button>Cancel</button></td>
+        </tr>
+    </script>
+    <script id="template-download" type="text/x-jquery-tmpl">
+        <tr class="template-download{{if error}} ui-state-error{{/if}}">
+            {{if error}}
+                <td></td>
+                <td class="name" id="name_link">${name}</td>
+                <td class="size">${sizef}</td>
+                <td class="error" colspan="2">File too big
+                </td>
+            {{else}}
+                <td class="name" id="name_link">
+                    <a href="${url}"{{if thumbnail_url}} target="_blank"{{/if}} id="name_link">${name}</a>
+                </td>
+                <td class="size">${sizef}</td>
+            {{/if}}
+        </tr>
+    </script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(function () {
+            // Initialize the jQuery File Upload widget:
+            $('#fileupload').fileupload();
+            // 
+            // Load existing files:
+
+
+            // Open download dialogs via iframes,
+            // to prevent aborting current uploads:
+            $('#fileupload .files a:not([target^=_blank])').live('click', function (e) {
+                e.preventDefault();
+                $('<iframe style="display:none;"></iframe>')
+                    .prop('src', this.href)
+                    .appendTo('body');
+            });
+
+        });
+				</script>
+		<script type="text/javascript" charset="utf-8">
+					var len = 15;
+					var a = document.getElementById('name_link');
+					if (a) {
+
+						var trunc = a.innerHTML;
+						if (trunc.length > len) {
+
+							/* Truncate the content of the P, then go back to the end of the
+								previous word to ensure that we don't truncate in the middle of
+								a word */
+							trunc = trunc.substring(0, len);
+							trunc = trunc.replace(/\w+$/, '');
+
+							/* Add an ellipses to the end and make it a link that expands
+								the paragraph back to its original size */
+							trunc += '<a href="#" ' +
+								'onclick="this.parentNode.innerHTML=' +
+								'unescape(\''+escape(a.innerHTML)+'\');return false;">' +
+								'...<\/a>';
+							a.innerHTML = trunc;
+						}
+					}
+    </script>
+</div>

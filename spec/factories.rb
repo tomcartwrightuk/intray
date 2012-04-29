@@ -1,4 +1,3 @@
-# By using the symbol ':user', we get Factory Girl to simulate the User model.
 Factory.define :user do |user|
   user.name                 	"Example User"
   user.email                	"intray@example.com"
@@ -25,16 +24,16 @@ Factory.define :shared_item do |shared_item|
   shared_item.shared_with_id  "2"
 end
 
-
-
-# Factory.define :upload do |upload|
-#   upload.uploaded_file_name "foobar.jpg"
-#   upload.file_id 2
-#   upload.association :user
-# end
-
-Factory.define :upload do |a|
-#   a.File.new(File.join(Rails.root, 'spec', 'fixtures', 'file.png')) 
-#   a.association :user
-#   a.upload.file_id "2"
+Factory.define :resource do |resource|
+  resource.reference "example.com"
+  resource.resource_type "link"
+  resource.association :user
 end
+
+Factory.define :upload, :class => Resource do |f|
+  f.upload { File.open(File.join(Rails.root, 'spec', 'fixtures', 'file.png')) }
+  f.resource_type "file"
+  f.association :user
+end
+
+

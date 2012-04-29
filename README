@@ -1,4 +1,12 @@
-== Circlshare
+== Intray 
 
-Circlshare is a brower based file sharing service aimed at education institutions.
+Intray is a brower based file sharing service. Connect with colleages and share individual files with them.
+Upload using an ajax drag-and-drop upload widget or old-school HTML.
+
+It uses amazon s3 for file storage.
+
+Todo list:
+
+- Add group signup - copy and drop in set of emails to signup a whole group.
+- 
 

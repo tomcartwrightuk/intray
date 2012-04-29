@@ -1,5 +1,5 @@
-<div id="add_link" class="round coloured_element side_widgets_small shadow">
-	<%= form_for Resource.new, {:controller => :resources, :action => :create } do |f| %>
+<div id="add_link" class="round coloured_element side_widgets_small">
+	<%= form_for Resource.new, {:controller => :resources, :action => :create}, :remote => true do |f| %>
 		<div class="input_wrapper search_element">
 			<%= f.hidden_field :resource_type, :value =>  "link" %>
 			<%= f.text_field :reference, { :title => "..type/paste a link", :id => "search_box", :class => "search_element" } %></div>

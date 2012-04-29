@@ -112,7 +112,10 @@
             // Callback for the start of each file upload request:
             // send: function (e, data) {}, // .bind('fileuploadsend', func);
             // Callback for successful uploads:
-            // done: function (e, data) {}, // .bind('fileuploaddone', func);
+            done: function (e, data) {
+		     
+		$(".file_list_table").html("<%= escape_javascript(render :partial => 'resources/resource', :collection => @resource_feed_items) %>");
+		}, // .bind('fileuploaddone', func);
             // Callback for failed (abort or error) uploads:
             // fail: function (e, data) {}, // .bind('fileuploadfail', func);
             // Callback for completed (success, abort or error) requests:

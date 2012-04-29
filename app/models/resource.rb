@@ -8,6 +8,7 @@ class Resource < ActiveRecord::Base
   validates :reference, :presence => true, :if => :link?
   validates :upload, :presence => true, :if => :file?,
     :file_size => { :maximum => 40.megabytes } 
+  validates :user_id, :presence => true
 
   has_many :shared_items, :dependent => :destroy
   
@@ -34,7 +35,14 @@ class Resource < ActiveRecord::Base
   def file?
     resource_type == "file"
   end
-  
+
+  def update_version_no(record, version)
+    #record.update_attributes(:version_no =>  new_ver_no)
+    @original = Resource.find_by_id(record)
+    @original.version_no = new_ver_no
+    @original.save
+  end
+
   include Rails.application.routes.url_helpers
   
   def self.search(search)
@@ -45,17 +53,18 @@ class Resource < ActiveRecord::Base
     end
   end
 
-  def self.update_if_present_or_create(reference)
-    reference = reference.add_protocol_to_link
-    result = self.find_by_reference(reference)
-    new_ref = self.new(:reference => reference, :resource_type => 'link')
+  def self.update_if_present_or_create(resource)
+    resource.add_protocol_to_link
+    result = self.find_by_reference(resource[:reference])
     if result
       result.update_attributes(:updated_at => Time.now)
       return true 
-    elsif new_ref.save
-      return true
-    else
-      return nil
+    else new_ref = self.new(resource)
+      if new_ref.save
+        return true
+      else
+        return nil
+      end
     end
   end
 	
@@ -88,15 +97,15 @@ class Resource < ActiveRecord::Base
     end
   end
 	
-  def add_reference
-    if upload.present?
-      self.reference = self.upload
-    end
-  end
-	
   def add_protocol_to_link
     if self.resource_type == "link" && self.reference[0..6] != "http://"
       self.reference = "http://" + self.reference
+    end
+  end
+
+  def add_reference
+    if upload.present?
+      self.reference = self.upload
     end
   end
 

@@ -5,21 +5,6 @@ require 'carrierwave/test/matchers'
 describe ResourcesController do
   include CarrierWave::Test::Matchers
 
-  #before do
-    #@user = Factory(:user)
-    #@file = File.open('spec/fixtures/50x50.png')
-    #@resource = Resource.new(@user)
-    #@resource.store!(File.open('spec/fixtures/50x50.png'))
-  #end
-  before(:each) do
-    #@user = Factory(:user)
-    #@file = File.open('spec/fixtures/50x50.png')
-    #@file_resource = @user.resources.build(@file)
-    #@link = { :link => "http://example.com" }
-    #@resource = @user.resources.build(@link)
-    #@uploaded = @resource.save
-  end
-
   describe "POST create" do
         
     before(:each) do
@@ -29,7 +14,7 @@ describe ResourcesController do
     describe "fail to create" do
       
       before(:each) do
-        @link = { :link => "" }
+        @link = { :reference => "", :resource_type => "link" }
       end
         
       it "should not create a new resource" do
@@ -40,17 +25,61 @@ describe ResourcesController do
     end
 
     describe "create success" do
-      it "should add a protocol to a link with no protocol" do
+      
+      before(:each) do
+        @link = { :reference => "example.com", :resource_type => "link" }
       end
+
+      it "should create a new resource" do
+        lambda do
+          post :create, :resource => @link  
+        end.should change(Resource, :count)
+      end
+
+      it "should redirect to the root path" do
+        post :create, :resource => @link  
+        response.should redirect_to(root_path)
+      end
+
+      it "should have a flash success message" do
+        post :create, :resource => @link  
+        flash[:success].should =~ /Link saved/i
+      end
+
+      it "should create a link resource using Ajax" do
+        lambda do
+          xhr :post, :create, :resource => @link
+          response.should be_success
+        end.should change(Resource, :count).by(1)
+      end
+
+
     end
 
   end
     
   describe "downloads" do
+    before do
+      @resource = Factory(:upload, :user => @user)
+    end
+
+    after do
+      UploadUploader.enable_processing = false
+    end
+
     describe "unauthenticated downloads" do
 
+      before do
+        @user = test_sign_in(Factory(:user))
+        @resource = Factory(:upload, :user => @user)
+      end
+
+      after do
+        UploadUploader.enable_processing = false
+      end
+
       it "should not allow access to the file" do
-        get :download, :id =>  @file_resource.id
+        get :download, :id => @resource 
         response.should redirect_to '/signin'
       end
 
@@ -59,6 +88,7 @@ describe ResourcesController do
     describe "authenticated uploads and downloads" do
       before do
         @user = test_sign_in(Factory(:user, :email => Factory.next(:email)))
+        @resource = Factory(:upload, :user => @user)
       end
 
       after do
@@ -66,11 +96,16 @@ describe ResourcesController do
       end
 
       it "should create an accessible file" do
-        get :download, :id => @file_resource 
-        response.should redirect_to @file_resource.upload.url
+        get :download, :id => @resource 
+        response.should redirect_to @resource.upload.url
       end
     end
   end
+
+  describe "file renaming" do
+  end
+
+    
 
 
 
