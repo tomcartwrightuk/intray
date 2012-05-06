@@ -420,6 +420,11 @@ display: none;
 		vertical-align: middle;
 }
 
+.edit_user {
+  width: 220px;
+  margin: auto;
+}
+
 #search_box {
 	margin: 12px 0 10px 9px !important;
 	
@@ -684,11 +689,10 @@ form.new_micropost textarea {
 }
 
 #add_note * {
-	display: inline-block;
 }
 
 #add_note_button {
-	margin-bottom: -5px;
+	margin-bottom:  0px;
 }
 
 #function_links_resources {

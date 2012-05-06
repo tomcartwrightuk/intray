@@ -6,7 +6,8 @@ describe UploadUploader do
   include CarrierWave::Test::Matchers
 
   before do
-    @resource = Resource.new
+    @user = Factory(:user)
+    @resource = @user.resources.new
     UploadUploader.enable_processing = true
     @uploader = UploadUploader.new(@resource, :upload)
     @uploader.store!(File.open('spec/fixtures/50x50.png'))

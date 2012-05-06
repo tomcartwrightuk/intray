@@ -26,7 +26,7 @@ describe SharedItem do
     end
 
     it "should have the right sharing user" do
-      @shared_resource.sharer.should == @sharer
+      @shared_resource.user_id.should == @sharer.id
     end 
     
     it "should respond to the shared with user" do

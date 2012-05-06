@@ -3,8 +3,7 @@
   <div id="home_page_left">
     <p>Welcome <%= current_user.name %>. You have used <%= number_to_human_size(@resource_allowance_used) %> of the <%= number_to_human_size(current_user.storage_allowance) %> allowance.</p>
     <p><span>Current items in your intray:</span>
-    <span style="float: right;"><% refresh = image_tag("/images/refresh.png", :alt => "") %><%= link_to refresh, root_path %>
-    <%= link_to "Refresh list", root_path %></span></p>
+    </p>
     <span style="font-size: 12px;">To save files, right-click on the name and select 'save as'</span>
     <% if @resource_feed_items == nil && params[:search] == nil %>
     <br><p>Upload a file or save a link with the tools on the right.<br>
@@ -29,8 +28,12 @@
                 <% else %>
                   <%= render 'resources/mini_upload_widget' %>
                 <% end %>
-  <span>Having problems uploading? Try our old school uploader</span>
-  <%= link_to("Toggle On", uploader_toggle_user_url(@user), :method => :put, :title => "This toggles it on") %>
+  <% if @user.uploader_option %>
+    <span>Having problems uploading? </span>
+    <%= link_to("Try the old school uploader", uploader_toggle_user_url(@user), :method => :put, :title => "uploader option") %>
+  <% else %>
+    <%= link_to("Try the drag and drop uploader", uploader_toggle_user_url(@user), :method => :put, :title => "uploader option") %>
+  <% end %>
 		
 		
 		

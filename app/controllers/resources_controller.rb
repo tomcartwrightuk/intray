@@ -46,10 +46,20 @@ class ResourcesController < ApplicationController
   end
 
   def show
-    @users = current_user.following.paginate(:page => params[:page])
+    @users_following = current_user.following.paginate(:page => params[:page])
+    @users = User.search(params[:search]).paginate(:page => params[:page])
+    @user = current_user
     @resource = Resource.find(params[:id])
     @shared_item = SharedItem.new
     @resource_id = params[:id]
+  end
+
+  def refresh_list
+    @resource_feed_items = current_user.resource_feed.search(params[:search]).paginate(:page => params[:page])
+    respond_to do |format|
+      format.js
+    end
+    
   end
 	
   def download
@@ -70,6 +80,7 @@ class ResourcesController < ApplicationController
   def edit
     @title = "Rename file"
     @resource = Resource.find(params[:id])
+    @users = User.search(params[:search]).paginate(:page => params[:page])
   end
 	
   def update

@@ -1,9 +1,5 @@
-<% if @users.empty? %>
-	<%= link_to "Find", users_path %> your colleagues to start sharing resources with them! 
-<% else %>
 
 <div class="centred_content" style="width: 500px;">
-<p class="no_bottom_margin">Share:</p>
 <table class="blue_coloured_element resource_to_share	centred_content">
 	<tr>
 		<td class="icon_cell">
@@ -19,7 +15,6 @@
 			<%= link_to "#{File.basename(@resource.upload_identifier.to_s)}", { :action => :download, :id => @resource.id }  %>
 			- <%= number_to_human_size(@resource.file_size) %>
 		</td>
-		<% end %>
 	</tr>
 	<tr>
 		<td></td>
@@ -36,9 +31,9 @@
 </table>
 </div>
 	 <br>
-	<%= will_paginate @users %>
+	<%= will_paginate @users_following %>
 	<table class="resource_share centred_content">	
-		<% @users.each do |user| %>
+		<% @users_following.each do |user| %>
 
 					<tr>
 					<td><%= link_to gravatar_for(user, :size => 30), user %></td>
@@ -59,5 +54,6 @@
 <p class="centred_content block" style="width: 500px;">
 <%= link_to "Find", users_path %> more colleagues to start sharing resources with them!
 </p>
+
 
 

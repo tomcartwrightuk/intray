@@ -31,6 +31,7 @@ Circl::Application.routes.draw do
   match 'sharedfiles' => 'resources#shared_files'
   match 'yourlinks' => 'resources#links'
   match 'sharedlinks' => 'resources#shared_links'
+  match '/refresh_list' => 'resources#refresh_list'
   match 'resources/new' => 'resources#create', :via => :post
 
   # The priority is based upon order of creation:

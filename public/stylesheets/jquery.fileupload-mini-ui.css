@@ -108,9 +108,13 @@
 
 .files .name {
   word-wrap: break-word;
-  width: 150px !important;
+  width: 150px;
   height: 30px;
 }
+
+.template-upload .name {
+  width: 200px !important;
+  }
 
 .files .size {
 /*   padding: 0 10px; */

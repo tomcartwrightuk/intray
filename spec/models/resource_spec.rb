@@ -52,10 +52,10 @@ describe Resource do
         @second_user = Factory(:user, :email => Factory.next(:email))
         @third_user = Factory(:user, :email => Factory.next(:email))
         
-        @user_resource = @user.resources.build(@link)
+        @user_resource = @user.resources.create!(@link)
         @second_resource = @third_user.resources.build(:link => "http://third_user_url.com")
         @user.follow!(@second_user)
-        @shared_item = @user.shared_items.build(:resource_id => @user_resource.id, :shared_with_id => @second_user.id)
+        @shared_item = @user.shared_items.create!(:resource_id => @user_resource.id, :shared_with_id => @second_user.id)
         
       end
 

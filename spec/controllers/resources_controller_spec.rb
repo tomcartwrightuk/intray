@@ -59,9 +59,6 @@ describe ResourcesController do
   end
     
   describe "downloads" do
-    before do
-      @resource = Factory(:upload, :user => @user)
-    end
 
     after do
       UploadUploader.enable_processing = false
@@ -70,8 +67,9 @@ describe ResourcesController do
     describe "unauthenticated downloads" do
 
       before do
-        @user = test_sign_in(Factory(:user))
+        @user = Factory(:user)
         @resource = Factory(:upload, :user => @user)
+        @second_user = test_sign_in(Factory(:user, :email => Factory.next(:email)))
       end
 
       after do
@@ -87,7 +85,7 @@ describe ResourcesController do
 
     describe "authenticated uploads and downloads" do
       before do
-        @user = test_sign_in(Factory(:user, :email => Factory.next(:email)))
+        @user = test_sign_in(Factory(:user))
         @resource = Factory(:upload, :user => @user)
       end
 
@@ -96,7 +94,7 @@ describe ResourcesController do
       end
 
       it "should create an accessible file" do
-        get :download, :id => @resource 
+        get :download, :id => @resource.id
         response.should redirect_to @resource.upload.url
       end
     end

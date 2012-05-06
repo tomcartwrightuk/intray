@@ -1,6 +1,8 @@
 require 'file_size_validator'
 
 class Resource < ActiveRecord::Base
+
+  attr_accessible :reference, :upload, :note, :link, :resource_type, :content_type
   belongs_to :user
   mount_uploader :upload, UploadUploader
   before_save :update_upload_attributes, :add_reference, :add_protocol_to_link
