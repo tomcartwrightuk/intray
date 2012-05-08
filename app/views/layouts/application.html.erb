@@ -2,103 +2,46 @@
 <html>
 <head>
   <title><%= title %></title>
-<!-- 	<%= javascript_include_tag 'jquery_ujs' %> -->
-	<%= favicon_link_tag 'favicon.ico' %>
-   <%= csrf_meta_tag %>
-    <!--[if lt IE 9]>
-  
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-		
-    <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
-    <%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
-    <!--[if lt IE 8]>
-			<%= stylesheet_link_tag 'blueprint/ie', :media => 'screen' %>
-		<![endif]-->
-    <%= stylesheet_link_tag 'custom', :media => 'screen' %>
-    <%= stylesheet_link_tag 'jquery.fileupload-mini-ui', :media => 'screen' %>
-    
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= csrf_meta_tag %>
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+              
+  <%= stylesheet_link_tag 'blueprint/screen', :media => 'screen' %>
+  <%= stylesheet_link_tag 'blueprint/print',  :media => 'print' %>
+  <!--[if lt IE 8]>
+    <%= stylesheet_link_tag 'blueprint/ie', :media => 'screen' %>
+  <![endif]-->
+  <%= stylesheet_link_tag 'custom', :media => 'screen' %>
+  <% if signed_in? && @user.uploader_option %>  
+    <%= stylesheet_link_tag 'jquery-ui' %>
+  <% end %>
+  <%= stylesheet_link_tag 'jquery.fileupload-mini-ui', :media => 'screen' %>
+  <%= javascript_include_tag 'jquery.min', 'jquery-ui.min',  'jquery.tmpl', 'rails',  'jquery.fileupload', 'jquery.fileupload-ui', 'jquery.iframe-transport', 'jquery.labelify', 'jquery.truncate.min', 'application' %>
 </head>
 <body>
 	
-  <%= javascript_include_tag 'jquery.min' %>
-  <%= javascript_include_tag 'jquery-ui.min' %>
-	<%= javascript_include_tag 'jquery.tmpl' %>
-	<%= javascript_include_tag 'rails' %>
-	<%= javascript_include_tag 'application' %>
-	<%= javascript_include_tag 'jquery.fileupload' %>
-	<%= javascript_include_tag 'jquery.fileupload-ui' %>
-	<%= javascript_include_tag 'jquery.iframe-transport' %>
-	<%= javascript_include_tag 'jquery.labelify' %>
-	<%= javascript_include_tag 'jquery.truncate.min' %>
+  <div class="container">	
+    <%= render 'layouts/header' %>
+  </div>
+    <section>
+    <%= render 'application/side_bar' %>	
+    <% flash.each do |key, value| %>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end %>			
 
-	<div class="container">	
-		
-	<%= render 'layouts/header' %>
-		
-	</div>
-	<section>
-	<%= render 'application/side_bar' %>	
-	<% flash.each do |key, value| %>
-			<div class="flash <%= key %>"><%= value %></div>
-		<% end %>			
-
-	<% if signed_in? %>
-
-<div class="container">	
-	<table class="front" id="main_table" summary="For signed-in users">
-		<tr>
-			<td id="main_frame_td" class="main">
-				<%= yield %>
-      </td>
-		</tr>
-  </table>
+    <div class="container">	
+      <table class="front" id="main_table" summary="For signed-in users">
+        <tr>
+          <td id="main_frame_td" class="main">
+            <%= yield %>
+          </td>
+        </tr>
+      </table>
 	
-	<% else %>
-<div id="signup" class="page_section signup_or_in container">
-	<table class="profile">
-		<tr>
-			<td class="main">
-				<h1>Teachers: Store and share your resources - no more memory sticks!</h1>	
-				<p>
-				Intray lets you access your lesson plans and resources from anywhere! Upload your files and keep them in one place. Share them with your colleagues. Sign up now!
-				</p>
-				<%= yield %>
-			</td>
 
-			<td class="sidebar round coloured_element">
-				<h1>New to Intray? Join today!</h1>
-				<div id="signupform">
-					<%= form_for(@user) do |f| %>
-					<%= render 'users/fields', :f => f %>
-						<div class="actions bigbutton">
-							<%= f.submit "Sign up" %>
-						</div>
-					<% end %>
-				</div>
-			</td>
-		</tr>
-	</table>
-</div>
-
-<script type="text/javascript">
-$(document).ready(function(){
-  $(":text").labelify({ labelledClass: "labelHighlight" });
-});
-</script>
-
-<style type="text/css">
-input.labelHighlight { color: #545454; }
-</style>
-
-		
-			
-	
-	<% end %>				
-
-	<%= debug(params) if Rails.env.development? %>
-	</div>
-	</section>
-
-	
+    <%= debug(params) if Rails.env.development? %>
+    </div>
+    </section>	
 </html>

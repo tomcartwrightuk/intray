@@ -30,6 +30,7 @@ header img {
 
 section {
   width: 100%;
+  height: 100%;
   margin-top: 2em;
   background: url("/images/creambackground_light_flat.jpg") repeat scroll 0 0 transparent
 }

@@ -22,23 +22,46 @@
     </div>
 
     <div id="home_page_right">
-		<%= render 'resources/add_link' %>
-                <% if @user.uploader_option %>
-                  <%= render 'resources/ajax_upload_widget' %>
-                <% else %>
-                  <%= render 'resources/mini_upload_widget' %>
-                <% end %>
+      <%= render 'resources/add_link' %>
+      <% if @user.uploader_option %>
+        <%= render 'resources/ajax_upload_widget' %>
+      <% else %>
+        <%= render 'resources/mini_upload_widget' %>
+      <% end %>
   <% if @user.uploader_option %>
     <span>Having problems uploading? </span>
     <%= link_to("Try the old school uploader", uploader_toggle_user_url(@user), :method => :put, :title => "uploader option") %>
   <% else %>
     <%= link_to("Try the drag and drop uploader", uploader_toggle_user_url(@user), :method => :put, :title => "uploader option") %>
   <% end %>
-		
-		
-		
-	</div>
+    </div>
 </div>
 <% else %>
-<p style="margin-left: auto; margin-right: auto; text-align: center;">Yay intray!</p>
+<div id="signup" class="page_section signup_or_in container">
+  <table class="profile">
+    <tr>
+      <td class="main">
+        <h1>Store and share your files - no more memory sticks!</h1>	
+        
+          <ul>
+          <li>Intray:</li>
+          <li>Upload files.</li>
+          <li>Share them with your colleages - with one click.</li>
+           <li>Simple. Sign up now!</li>
+          </ul>
+      </td>
+      <td class="sidebar round coloured_element">
+        <h1>New to Intray? Join today!</h1>
+	  <div id="signupform">
+	  <%= form_for(@user) do |f| %>
+	  <%= render 'users/fields', :f => f %>
+	    <div class="actions bigbutton">
+	      <%= f.submit "Sign up" %>
+	    </div>
+	    <% end %>
+	  </div>
+      </td>
+     </tr>
+  </table>
+</div>
 <% end %>

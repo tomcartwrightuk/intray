@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120428175149) do
+ActiveRecord::Schema.define(:version => 20120507220634) do
 
   create_table "file_sharing_relationships", :force => true do |t|
     t.integer  "sharer_id"
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(:version => 20120428175149) do
     t.integer  "storage_allowance",  :default => 524288000
     t.integer  "storage_used",       :default => 0
     t.string   "sign_up_code"
-    t.boolean  "uploader_option"
+    t.boolean  "uploader_option",    :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

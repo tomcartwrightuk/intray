@@ -11,6 +11,8 @@ gem 'rack-raw-upload'
 gem 'fog'
 gem 'grape', '~> 0.1.5'
 gem 'shoulda-matchers'
+gem 'capistrano', '2.8.0'
+gem 'capistrano-ext', '1.2.1'
 
 group :development do
   gem 'rspec-rails', '2.6.0'

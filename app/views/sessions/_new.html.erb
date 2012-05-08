@@ -1,35 +1,16 @@
 <!--<table id="signincontent">-->
-
-	<%= form_for(:session, :url => sessions_path) do |f| %>
-		<td class="field input_wrapper_signin">
-			<%= f.label :email, :value => "email" %><br />
-			<%= f.text_field :email, :title => "Email" %>
-		</td>
-		<td class="field input_wrapper_signin">
-			<%= f.label :password %><br />
-			<%= f.text_field :password_clear, {:value => "Password" } %>
-			<%= f.password_field :password %>
-		</td>
-		<td class="actions signinbutton">
-			<%= f.submit "Sign in" %>
-		</td>
-	<% end %>
+  <%= form_for(:session, :url => sessions_path) do |f| %>
+    <td class="field input_wrapper_signin">
+      <%= f.label :email, :value => "email" %><br />
+      <%= f.text_field :email, :title => "Email" %>
+    </td>
+    <td class="field input_wrapper_signin">
+      <%= f.label :password %><br />
+      <%= f.text_field :password_clear, {:value => "Password" } %>
+      <%= f.password_field :password %>
+    </td>
+    <td class="actions signinbutton">
+      <%= f.submit "Sign in" %>
+    </td>
+<% end %>
 <!--</div>-->
-
-<script type="text/javascript">
-$('#session_password_clear').show();
-	$('#session_password').hide();
-	 
-$('#session_password_clear').focus(function() {
-	    $('#session_password_clear').hide();
-	    $('#session_password').show();
-	    $('#session_password').focus();
-	});
-	$('#session_password').blur(function() {
-	    if($('#session_password').val() == '') {
-	        $('#session_password_clear').show();
-	        $('#session_password').hide();
-	    }
-	});
-
-</script>

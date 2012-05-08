@@ -5,7 +5,7 @@
         <%= image_tag("/images/avatars/lightblue.png", :alt => @user.name, :class => "gravatar") %>
         <%= @user.name %>
       </h1>
-			<%= link_to "Edit profile", edit_user_path(current_user) %>
+      <%= link_to "Edit profile", edit_user_path(current_user) %>
       <%= render 'follow_form' if signed_in? %>
     </td>
     <td class="sidebar round">

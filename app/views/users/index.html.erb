@@ -1,48 +1,44 @@
 <h1>Connect with your colleagues</h1>
 
 <table>
-	<tr>
-		<td>
-			<%= form_tag users_path, :method => 'get' do %>
-				<p>
-					<%= text_field_tag :search, params[:search] %>
-					<%= submit_tag "Search for colleagues", :name => nil %>
-				</p>
-			<% end %>
-
-			<%= will_paginate %>
-			<table>
-				<% @users.each do |user| %>
-					<tr>
-						
-						<td><%= link_to user.name, user %></td>
-							<td >
-							<%= tag "div", :id => "follow_form_#{user.id}" %>
-								<% @user_to_follow = user %>
-									<% unless current_user?(@user_to_follow) %>
-										<% if current_user.following?(@user_to_follow) %>
-												<%= render 'unfollow', :user_to_follow => @user_to_follow %>
-											<% else %>
-												<%= render 'follow', :user_to_follow => @user_to_follow %>
-										<% end %>
-									<% end %>
-							</div>
-						</td>
-						<% if current_user.admin? %>
-						<td><%= link_to "delete", user, :method => :delete, :confirm => "You sure?",
-										:title => "Delete #{user.name}" %></td>
-							<% end %>
-					</tr>
-				<% end %>
-				</table>
-			<%= will_paginate %>
-
-			</td>
-			<td class="sidebar round">
-      <strong>Name</strong> <%= @user.name %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), @user %>
-      <br><strong>Files shared</strong> <%= @user.shared_items.count %>
-				<%= render 'shared/stats' %>
-			</td>
-		<tr>
+  <tr>
+<td>
+  <%= form_tag users_path, :method => 'get' do %>
+  <p>
+  <%= text_field_tag :search, params[:search] %>
+  <%= submit_tag "Search for colleagues", :name => nil %>
+  </p>
+  <% end %>
+  <%= will_paginate %>
+    <table>
+      <% @users.each do |user| %>
+      <tr>
+      <td><%= link_to user.name, user %></td>
+      <td>
+	<%= tag "div", :id => "follow_form_#{user.id}" %>
+	<% @user_to_follow = user %>
+	<% unless current_user?(@user_to_follow) %>
+	  <% if current_user.following?(@user_to_follow) %>
+	    <%= render 'unfollow', :user_to_follow => @user_to_follow %>
+	  <% else %>
+	    <%= render 'follow', :user_to_follow => @user_to_follow %>
+	  <% end %>
+	<% end %>
+	</div>
+      </td>
+	<% if current_user.admin? %>
+  	  <td><%= link_to "delete", user, :method => :delete, :confirm => "You sure?",  :title => "Delete #{user.name}" %></td>
+	<% end %>
+      </tr>
+      <% end %>
+      </table>
+        <%= will_paginate %>
+	</td>
+	<td class="sidebar round">
+        <strong>Name</strong> <%= @user.name %><br />
+        <strong>URL</strong>  <%= link_to user_path(@user), @user %>
+        <br><strong>Files shared</strong> <%= @user.shared_items.count %>
+        <%= render 'shared/stats' %>
+	</td>
+      </tr>
 </table>

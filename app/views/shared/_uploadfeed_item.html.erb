@@ -4,11 +4,11 @@
       <%= link_to uploadfeed_item.user.name, uploadfeed_item.user %>
     </span>
     <span class="content">
-		<%= link_to uploadfeed_item.uploaded_file_name %>
+      <%= link_to uploadfeed_item.uploaded_file_name %>
 <%= link_to "Download", uploadfeed_item.uploaded.url(:original, false) %>
-	</span>
+    </span>
     
-		<span class="timestamp">
+    <span class="timestamp">
       Posted <%= time_ago_in_words(uploadfeed_item.uploaded_updated_at) %> ago.
     </span>
   </td>
